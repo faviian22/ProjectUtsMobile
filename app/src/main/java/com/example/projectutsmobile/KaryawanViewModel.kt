@@ -1,4 +1,4 @@
-package com.example.app.adapter
+package com.example.projectutsmobile
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
