@@ -1,4 +1,4 @@
-package com.example.app.adapter
+package com.example.projectutsmobile
 
 import android.view.LayoutInflater
 import android.view.View
