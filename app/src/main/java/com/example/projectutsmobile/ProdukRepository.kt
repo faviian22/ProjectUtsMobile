@@ -1,8 +1,6 @@
 package com.example.projectutsmobile
 
 import androidx.lifecycle.LiveData
-import com.example.projectutsmobile.Produk
-import com.example.projectutsmobile.ProdukDao
 
 class ProdukRepository(private val produkDao: ProdukDao) {
 
