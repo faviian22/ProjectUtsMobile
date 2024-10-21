@@ -2,4 +2,33 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#03A9F4</color>
+    <color name="tableRowBackground">#f0f0f0</color> <!-- Light gray for rows -->
+    <color name="primaryColor">#003366</color> <!-- Dark navy blue -->
+    <color name="primaryLightColor">#005599</color> <!-- Slightly lighter for hover or pressed states -->
+
+    <!-- Secondary Colors -->
+    <color name="secondaryColor">#008080</color> <!-- Teal for secondary actions -->
+    <color name="secondaryLightColor">#00A0A0</color> <!-- Lighter teal for secondary hover/pressed -->
+
+    <!-- Backgrounds -->
+    <color name="backgroundColor">#F5F5F5</color> <!-- Light neutral gray for the overall background -->
+    <color name="rowBackgroundColor">#FFFFFF</color> <!-- Pure white for table row backgrounds -->
+
+    <!-- Dividers -->
+    <color name="dividerColor">#DADADA</color> <!-- Light gray divider for subtle separation -->
+
+    <!-- Buttons -->
+    <color name="editButtonColor">#005599</color> <!-- Light blue for edit actions -->
+    <color name="deleteButtonColor">#CC3333</color> <!-- Red for delete actions -->
+
+    <!-- Text Colors -->
+    <color name="primaryTextColor">#333333</color> <!-- Dark gray for main text -->
+    <color name="secondaryTextColor">#666666</color> <!-- Medium gray for secondary text -->
+    <color name="buttonBackgroundColor">#007ACC</color> <!-- Bright blue for general action buttons -->
+
+    <color name="labelTextColor">#616161</color> <!-- Dark gray for labels -->
+    <color name="valueTextColor">#212121</color>
+
+
 </resources>

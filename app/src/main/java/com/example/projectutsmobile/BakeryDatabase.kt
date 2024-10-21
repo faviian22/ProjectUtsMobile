@@ -4,10 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.app.dao.KaryawanDao
 import com.example.app.dao.SuplierDao
-import com.example.app.model.Karyawan
-import com.example.app.model.Suplier
+
 import com.example.projectutsmobile.Produk
 import com.example.projectutsmobile.ProdukDao
 

@@ -4,14 +4,14 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectutsmobile.R
 import com.example.projectutsmobile.databinding.ActivityKaryawanBinding
 
-class KaryawanActivity : AppCompatActivity() {
+class KaryawanActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityKaryawanBinding
     private lateinit var karyawanViewModel: KaryawanViewModel
