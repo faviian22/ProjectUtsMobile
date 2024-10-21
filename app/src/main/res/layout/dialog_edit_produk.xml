@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:elevation="4dp">
+
+        <EditText
+            android:id="@+id/editTextNamaProduk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Produk"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background" />
+
+        <EditText
+            android:id="@+id/editTextStokProduk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Stok Produk"
+            android:inputType="number"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background" />
+
+        <EditText
+            android:id="@+id/editTextSatuanProduk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Stok Produk"
+            android:inputType="number"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background" />
+
+        <EditText
+            android:id="@+id/editTextHargaProduk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Harga Produk"
+            android:inputType="number"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edit_text_background" />
+
+        <Button
+            android:id="@+id/buttonSaveProduk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan"
+            android:padding="12dp"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>
