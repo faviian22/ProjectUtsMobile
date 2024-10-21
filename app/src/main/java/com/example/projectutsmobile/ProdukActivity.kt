@@ -48,7 +48,6 @@ class ProdukActivity : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_add_produk)
 
-        val editTextId = dialog.findViewById<EditText>(R.id.editTextIdProduk)
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaProduk)
         val editTextStok = dialog.findViewById<EditText>(R.id.editTextStokProduk)
         val editTextSatuan = dialog.findViewById<EditText>(R.id.editTextSatuanProduk)
@@ -56,12 +55,11 @@ class ProdukActivity : AppCompatActivity() {
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveProduk)
 
         buttonSave.setOnClickListener {
-            val id = editTextId.text.toString().toIntOrNull() ?: 0
             val nama = editTextNama.text.toString().trim()
             val stok = editTextStok.text.toString().toIntOrNull() ?: 0
             val satuan = editTextSatuan.text.toString().toIntOrNull() ?: 0
             val harga = editTextHarga.text.toString().toIntOrNull() ?: 0
-            val produk = Produk(id, nama, stok, satuan, harga)
+            val produk = Produk(0, nama, stok, satuan, harga)
             produkViewModel.insert(produk)
             dialog.dismiss()
         }

@@ -36,7 +36,6 @@ class ProdukAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(produk: Produk, onEdit: (Produk) -> Unit, onDelete: (Produk) -> Unit) {
-            binding.textViewIdProduk.text = produk.id_produk.toString()
             binding.textViewNamaProduk.text = produk.namaProduk
             binding.textViewStokProduk.text = produk.stokProduk.toString()
             binding.textViewSatuanProduk.text = produk.satuanProduk.toString()

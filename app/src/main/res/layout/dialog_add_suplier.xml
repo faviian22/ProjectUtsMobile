@@ -13,16 +13,6 @@
         android:elevation="4dp">
 
         <EditText
-            android:id="@+id/editTextIdSuplier"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ID Suplier"
-            android:padding="12dp"
-            android:inputType="number"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
-
-        <EditText
             android:id="@+id/editTextNamaSuplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -47,7 +47,6 @@ class SuplierActivity : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_add_suplier) // Gunakan layout terpisah untuk menambah suplier
 
-        val editTextId = dialog.findViewById<EditText>(R.id.editTextIdSuplier)
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaSuplier)
         val editTextNoTlpn = dialog.findViewById<EditText>(R.id.editTextNoTlpn)
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatSuplier)
@@ -55,12 +54,11 @@ class SuplierActivity : AppCompatActivity() {
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveSuplier)
 
         buttonSave.setOnClickListener {
-            val id = editTextId.text.toString().toIntOrNull() ?: 0
             val nama = editTextNama.text.toString()
             val noTlpn = editTextNoTlpn.text.toString()
             val alamat = editTextAlamat.text.toString()
             val namaProduk = editTextNamaProduk.text.toString()
-            val suplier = Suplier(id, nama, noTlpn, alamat, namaProduk)
+            val suplier = Suplier(0, nama, noTlpn, alamat, namaProduk)
             suplierViewModel.insert(suplier)
             dialog.dismiss()
         }

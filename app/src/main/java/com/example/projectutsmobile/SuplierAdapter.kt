@@ -36,7 +36,6 @@ class SuplierAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(suplier: Suplier, onEdit: (Suplier) -> Unit, onDelete: (Suplier) -> Unit) {
-            binding.textViewIdSuplier.text = suplier.id_suplier.toString()
             binding.textViewNamaSuplier.text = suplier.nama_suplier
             binding.textViewNoTlpn.text = suplier.no_Tlpn
             binding.textViewAlamatSuplier.text = suplier.alamat_suplier
