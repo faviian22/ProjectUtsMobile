@@ -3,6 +3,7 @@ package com.example.projectutsmobile
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bakerysupply.KaryawanActivity
 import com.example.projectutsmobile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

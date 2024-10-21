@@ -8,16 +8,6 @@
     android:gravity="center">
 
     <EditText
-        android:id="@+id/editTextIdKaryawan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ID Karyawan"
-        android:padding="10dp"
-        android:inputType="number"
-        android:layout_marginBottom="16dp"
-        android:background="@android:drawable/editbox_background" />
-
-    <EditText
         android:id="@+id/editTextNamaKaryawan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

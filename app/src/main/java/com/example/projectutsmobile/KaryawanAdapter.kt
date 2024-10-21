@@ -26,7 +26,6 @@ class KaryawanAdapter(
         val currentKaryawan = karyawanList[position]
 
         // Menggunakan View Binding untuk akses ke views
-        holder.binding.textViewIdKaryawan.text = currentKaryawan.id_karyawan.toString()
         holder.binding.textViewNamaKaryawan.text = currentKaryawan.nama_karyawan
         holder.binding.textViewJenisKelaminKaryawan.text = currentKaryawan.jenis_kelamin
         holder.binding.textViewAlamatKaryawan.text = currentKaryawan.alamat_karyawan
