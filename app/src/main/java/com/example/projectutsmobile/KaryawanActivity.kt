@@ -1,4 +1,4 @@
-package com.example.bakerysupply
+package com.example.projectutsmobile
 
 import android.app.Dialog
 import android.os.Bundle
