@@ -2,7 +2,7 @@ package com.example.projectutsmobile
 
 import androidx.lifecycle.LiveData
 import com.example.app.dao.SuplierDao
-import com.example.app.model.Suplier
+
 
 class SuplierRepository(private val suplierDao: SuplierDao) {
 

@@ -7,7 +7,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.app.model.Suplier
+import com.example.projectutsmobile.Suplier
 
 @Dao
 interface SuplierDao {

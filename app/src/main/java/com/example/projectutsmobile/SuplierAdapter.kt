@@ -3,7 +3,7 @@ package com.example.app.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.app.model.Suplier
+import com.example.projectutsmobile.Suplier
 import com.example.projectutsmobile.databinding.ItemSuplierBinding
 
 class SuplierAdapter(

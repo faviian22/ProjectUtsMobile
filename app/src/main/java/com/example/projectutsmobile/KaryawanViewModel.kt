@@ -4,8 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.app.model.Karyawan
-import com.example.projectutsmobile.KaryawanRepository
 import kotlinx.coroutines.launch
 class KaryawanViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: KaryawanRepository

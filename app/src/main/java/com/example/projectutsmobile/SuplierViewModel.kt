@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.app.model.Suplier
 import com.example.projectutsmobile.BakeryDatabase
+import com.example.projectutsmobile.Suplier
 import com.example.projectutsmobile.SuplierRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

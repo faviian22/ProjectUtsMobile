@@ -1,8 +1,7 @@
 package com.example.projectutsmobile
 
 import androidx.lifecycle.LiveData
-import com.example.app.dao.KaryawanDao
-import com.example.app.model.Karyawan
+
 
 class KaryawanRepository(private val karyawanDao: KaryawanDao) {
 

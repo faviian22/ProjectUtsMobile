@@ -10,9 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectutsmobile.R
 import com.example.projectutsmobile.databinding.ActivityKaryawanBinding
-import com.example.app.adapter.KaryawanAdapter
-import com.example.app.model.Karyawan
-
 
 class KaryawanActivity : AppCompatActivity() {
 
