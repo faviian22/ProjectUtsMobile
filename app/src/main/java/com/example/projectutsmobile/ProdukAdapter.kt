@@ -38,7 +38,7 @@ class ProdukAdapter(
         fun bind(produk: Produk, onEdit: (Produk) -> Unit, onDelete: (Produk) -> Unit) {
             binding.textViewNamaProduk.text = produk.namaProduk
             binding.textViewStokProduk.text = produk.stokProduk.toString()
-            binding.textViewSatuanProduk.text = produk.satuanProduk.toString()
+            binding.textViewSatuanProduk.text = produk.satuanProduk
             binding.textViewHargaProduk.text = produk.hargaProduk.toString()
 
             binding.buttonEdit.setOnClickListener {

@@ -8,8 +8,9 @@ data class Produk(
     @PrimaryKey(autoGenerate = true)
     val id_produk: Int,
     val namaProduk: String,
-    val satuanProduk: Int,
-    val hargaProduk: Int,
-    val stokProduk: Int
+    val stokProduk: Int,
+    val satuanProduk: String,
+    val hargaProduk: Int
+
 
 )

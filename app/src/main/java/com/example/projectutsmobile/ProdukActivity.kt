@@ -57,7 +57,7 @@ class ProdukActivity : AppCompatActivity() {
         buttonSave.setOnClickListener {
             val nama = editTextNama.text.toString().trim()
             val stok = editTextStok.text.toString().toIntOrNull() ?: 0
-            val satuan = editTextSatuan.text.toString().toIntOrNull() ?: 0
+            val satuan = editTextSatuan.text.toString().trim()
             val harga = editTextHarga.text.toString().toIntOrNull() ?: 0
             val produk = Produk(0, nama, stok, satuan, harga)
             produkViewModel.insert(produk)
@@ -79,14 +79,14 @@ class ProdukActivity : AppCompatActivity() {
 
         editTextNama.setText(produk.namaProduk)
         editTextStok.setText(produk.stokProduk.toString())
-        editTextSatuan.setText(produk.satuanProduk.toString())
+        editTextSatuan.setText(produk.satuanProduk)
         editTextHarga.setText(produk.hargaProduk.toString())
 
         buttonSave.setOnClickListener {
             val updatedProduk = produk.copy(
                 namaProduk = editTextNama.text.toString().trim(),
                 stokProduk = editTextStok.text.toString().toIntOrNull() ?: produk.stokProduk,
-                satuanProduk = editTextSatuan.text.toString().toIntOrNull() ?: produk.satuanProduk,
+                satuanProduk = editTextSatuan.text.toString().trim(),
                 hargaProduk = editTextHarga.text.toString().toIntOrNull() ?: produk.hargaProduk
             )
 
