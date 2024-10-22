@@ -22,4 +22,7 @@ interface SuplierDao {
 
     @Query("SELECT * FROM suplier_table ORDER BY id_suplier ASC")
     fun getAllSuplier(): LiveData<List<Suplier>>
+
+    @Query("SELECT * FROM suplier_table")
+    fun getAll(): Array<Suplier>
 }

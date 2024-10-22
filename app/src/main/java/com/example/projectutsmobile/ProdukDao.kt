@@ -21,4 +21,7 @@ interface ProdukDao {
 
     @Query("SELECT * FROM produk_table ORDER BY id_produk ASC")
     fun getAllProduk(): LiveData<List<Produk>>
+
+    @Query("SELECT * FROM produk_table")
+    fun getAll(): Array<Produk>
 }
