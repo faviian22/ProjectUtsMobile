@@ -20,15 +20,15 @@ class SuplierViewModel(application: Application) : AndroidViewModel(application)
         allSuplier = repository.allSuplier
     }
 
-    fun insert(suplier: Suplier) = viewModelScope.launch(Dispatchers.IO) {
+    fun insert(suplier: Suplier) = viewModelScope.launch{
         repository.insert(suplier)
     }
 
-    fun update(suplier: Suplier) = viewModelScope.launch(Dispatchers.IO) {
+    fun update(suplier: Suplier) = viewModelScope.launch {
         repository.update(suplier)
     }
 
-    fun delete(suplier: Suplier) = viewModelScope.launch(Dispatchers.IO) {
+    fun delete(suplier: Suplier) = viewModelScope.launch {
         repository.delete(suplier)
     }
 }

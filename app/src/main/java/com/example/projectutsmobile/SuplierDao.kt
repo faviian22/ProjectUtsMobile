@@ -11,7 +11,7 @@ import com.example.projectutsmobile.Suplier
 
 @Dao
 interface SuplierDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     suspend fun insert(suplier: Suplier)
 
     @Update
