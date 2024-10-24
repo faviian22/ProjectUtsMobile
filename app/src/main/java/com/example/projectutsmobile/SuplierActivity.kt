@@ -23,7 +23,7 @@ class SuplierActivity : AppCompatActivity() {
         binding = ActivitySuplierBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Menginisialisasi Adapter
+
         adapter = SuplierAdapter(
             onEdit = { suplier -> showEditDialog(suplier) },
             onDelete = { suplier -> showDeleteDialog(suplier) }
@@ -31,13 +31,12 @@ class SuplierActivity : AppCompatActivity() {
         binding.recyclerviewSuplier.adapter = adapter
         binding.recyclerviewSuplier.layoutManager = LinearLayoutManager(this)
 
-        // Observasi LiveData dari ViewModel dan update adapter ketika data berubah
+
         suplierViewModel = ViewModelProvider(this).get(SuplierViewModel::class.java)
         suplierViewModel.allSuplier.observe(this, { suplier ->
             suplier?.let { adapter.submitList(it) }  // Gunakan setSuplier untuk memperbarui data
         })
 
-        // Tombol untuk menambahkan suplier baru
         binding.buttonSaveSuplier.setOnClickListener {
             showAddDialog()
         }
@@ -76,7 +75,7 @@ class SuplierActivity : AppCompatActivity() {
         val editTextNamaProduk = dialog.findViewById<EditText>(R.id.editTextNamaProduk)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveSuplier)
 
-        // Set data suplier saat ini di dialog
+
         editTextNama.setText(suplier.nama_suplier)
         editTextNoTlpn.setText(suplier.no_Tlpn)
         editTextAlamat.setText(suplier.alamat_suplier)
@@ -103,18 +102,16 @@ class SuplierActivity : AppCompatActivity() {
         val buttonCancel = dialog.findViewById<Button>(R.id.buttonCancel)
         val buttonConfirmDelete = dialog.findViewById<Button>(R.id.buttonConfirmDelete)
 
-        // Ketika tombol "Tidak" diklik, tutup dialog
         buttonCancel.setOnClickListener {
             dialog.dismiss()
         }
 
-        // Ketika tombol "Ya" diklik, hapus suplier dan tutup dialog
-        buttonConfirmDelete.setOnClickListener {
+          buttonConfirmDelete.setOnClickListener {
             suplierViewModel.delete(suplier)
             dialog.dismiss()
         }
 
-        dialog.show() // Tampilkan dialog
+        dialog.show()
     }
 
 }

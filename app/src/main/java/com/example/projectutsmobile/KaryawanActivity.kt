@@ -24,7 +24,7 @@ class KaryawanActivity : AppCompatActivity() {
         binding = ActivityKaryawanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Menginisialisasi Adapter
+
         adapter = KaryawanAdapter(
             onEditClick = { karyawan -> showEditDialog(karyawan) },
             onDeleteClick = { karyawan -> showDeleteDialog(karyawan) }
@@ -32,13 +32,11 @@ class KaryawanActivity : AppCompatActivity() {
         binding.recyclerviewKaryawan.adapter = adapter
         binding.recyclerviewKaryawan.layoutManager = LinearLayoutManager(this)
 
-        // Observasi LiveData dari ViewModel dan update adapter ketika data berubah
         karyawanViewModel = ViewModelProvider(this).get(KaryawanViewModel::class.java)
         karyawanViewModel.allKaryawan.observe(this, { karyawan ->
             karyawan?.let { adapter.setKaryawan(it) }
         })
 
-        // Tombol untuk menambahkan karyawan baru
         binding.buttonSaveKaryawan.setOnClickListener {
             showAddDialog()
         }
@@ -53,7 +51,6 @@ class KaryawanActivity : AppCompatActivity() {
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
 
-        // Menyimpan data karyawan baru ketika tombol Save diklik
         buttonSave.setOnClickListener {
             val nama = editTextNama.text.toString()
             val jenisKelamin = editTextJenisKelamin.text.toString()
@@ -75,7 +72,7 @@ class KaryawanActivity : AppCompatActivity() {
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
 
-        // Set existing details
+
         editTextNama.setText(karyawan.nama_karyawan)
         editTextJenisKelamin.setText(karyawan.jenis_kelamin)
         editTextAlamat.setText(karyawan.alamat_karyawan)

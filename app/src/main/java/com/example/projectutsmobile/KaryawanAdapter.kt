@@ -25,7 +25,7 @@ class KaryawanAdapter(
     override fun onBindViewHolder(holder: KaryawanViewHolder, position: Int) {
         val currentKaryawan = karyawanList[position]
 
-        // Menggunakan View Binding untuk akses ke views
+
         holder.binding.textViewNamaKaryawan.text = currentKaryawan.nama_karyawan
         holder.binding.textViewJenisKelaminKaryawan.text = currentKaryawan.jenis_kelamin
         holder.binding.textViewAlamatKaryawan.text = currentKaryawan.alamat_karyawan
