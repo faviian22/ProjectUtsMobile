@@ -34,7 +34,7 @@ class SuplierActivity : AppCompatActivity() {
 
         suplierViewModel = ViewModelProvider(this).get(SuplierViewModel::class.java)
         suplierViewModel.allSuplier.observe(this, { suplier ->
-            suplier?.let { adapter.submitList(it) }  // Gunakan setSuplier untuk memperbarui data
+            suplier?.let { adapter.submitList(it) }
         })
 
         binding.buttonSaveSuplier.setOnClickListener {
@@ -44,7 +44,7 @@ class SuplierActivity : AppCompatActivity() {
 
     private fun showAddDialog() {
         val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_add_suplier) // Gunakan layout terpisah untuk menambah suplier
+        dialog.setContentView(R.layout.dialog_add_suplier)
 
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaSuplier)
         val editTextNoTlpn = dialog.findViewById<EditText>(R.id.editTextNoTlpn)

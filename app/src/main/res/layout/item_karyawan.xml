@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/backgroundColor"> <!-- Background for the whole view -->
+    android:background="@color/backgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,7 +69,6 @@
             android:padding="8dp" />
     </LinearLayout>
 
-    <!-- Divider -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -104,14 +103,12 @@
             android:padding="8dp" />
     </LinearLayout>
 
-    <!-- Divider -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/dividerColor"
         android:layout_marginVertical="8dp" />
 
-    <!-- Buttons Row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -128,7 +125,7 @@
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginEnd="8dp"
-            android:padding="12dp" /> <!-- Added padding for better touch target -->
+            android:padding="12dp" />
 
         <Button
             android:id="@+id/buttonDelete"
@@ -139,7 +136,7 @@
             android:text="Hapus"
             android:textColor="@color/white"
             android:textSize="14sp"
-            android:padding="12dp" /> <!-- Added padding for better touch target -->
+            android:padding="12dp" />
     </LinearLayout>
 
 </LinearLayout>

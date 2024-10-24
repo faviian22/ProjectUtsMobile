@@ -10,7 +10,7 @@
     android:background="@android:color/background_light"
     tools:context=".MainActivity">
 
-    <!-- Top Image for Visual Appeal -->
+
     <ImageView
         android:id="@+id/headerImage"
         android:layout_width="0dp"
@@ -22,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Title Text -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
@@ -36,7 +35,6 @@
         app:layout_constraintTop_toBottomOf="@+id/headerImage"
         android:layout_marginTop="24dp" />
 
-    <!-- Produk CardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="0dp"
@@ -75,7 +73,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Karyawan CardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
@@ -86,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        android:layout_marginTop="16dp"> <!-- Tambahkan margin top -->
+        android:layout_marginTop="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,7 +111,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Gudang CardView -->
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSuplier"
         android:layout_width="0dp"
@@ -125,7 +122,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        android:layout_marginTop="16dp"> <!-- Tambahkan margin top -->
+        android:layout_marginTop="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"

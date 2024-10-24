@@ -55,7 +55,7 @@ class KaryawanActivity : AppCompatActivity() {
             val nama = editTextNama.text.toString()
             val jenisKelamin = editTextJenisKelamin.text.toString()
             val alamat = editTextAlamat.text.toString()
-            val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat) // ID = 0, akan di-generate otomatis
+            val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat)
             karyawanViewModel.insert(karyawanBaru)
             dialog.dismiss()
         }
