@@ -12,7 +12,7 @@ import androidx.room.Update
 @Dao
 interface KaryawanDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun insert( karyawan: Karyawan)
 
     @Update

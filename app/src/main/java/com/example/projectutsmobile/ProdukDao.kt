@@ -10,7 +10,7 @@ import androidx.room.*
 
 @Dao
 interface ProdukDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     suspend fun insert(produk: Produk)
 
     @Update
