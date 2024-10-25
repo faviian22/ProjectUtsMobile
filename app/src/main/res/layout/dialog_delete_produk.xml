@@ -11,7 +11,7 @@
         android:id="@+id/textViewDeleteMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apakah Anda yakin ingin menghapus data suplier ini?"
+        android:text="Apakah Anda yakin ingin menghapus data produk ini?"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
