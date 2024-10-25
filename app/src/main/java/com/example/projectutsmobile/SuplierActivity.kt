@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectutsmobile.databinding.ActivitySuplierBinding
 import com.example.app.adapter.SuplierAdapter
-import com.example.app.viewmodel.SuplierViewModel
+
 
 class SuplierActivity : AppCompatActivity() {
 

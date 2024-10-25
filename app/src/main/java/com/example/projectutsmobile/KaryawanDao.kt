@@ -13,7 +13,7 @@ import androidx.room.Update
 interface KaryawanDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun insert( karyawan: Karyawan)
+    suspend fun insert( karyawan: Karyawan)
 
     @Update
     suspend fun update(karyawan: Karyawan)
