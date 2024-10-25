@@ -67,7 +67,7 @@ class SuplierActivity : AppCompatActivity() {
 
     private fun showEditDialog(suplier: Suplier) {
         val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_edit_suplier) // Gunakan layout terpisah untuk edit suplier
+        dialog.setContentView(R.layout.dialog_edit_suplier)
 
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaSuplier)
         val editTextNoTlpn = dialog.findViewById<EditText>(R.id.editTextNoTlpn)
@@ -97,7 +97,7 @@ class SuplierActivity : AppCompatActivity() {
 
     private fun showDeleteDialog(suplier: Suplier) {
         val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_delete_suplier) // Gunakan layout kustom untuk dialog delete
+        dialog.setContentView(R.layout.dialog_delete_suplier)
 
         val buttonCancel = dialog.findViewById<Button>(R.id.buttonCancel)
         val buttonConfirmDelete = dialog.findViewById<Button>(R.id.buttonConfirmDelete)
