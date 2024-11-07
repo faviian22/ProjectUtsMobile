@@ -7,10 +7,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.projectutsmobile.Karyawan
-import com.example.projectutsmobile.KaryawanAdapter
-import com.example.projectutsmobile.KaryawanViewModel
-import com.example.projectutsmobile.R
 import com.example.projectutsmobile.databinding.ActivityKaryawanBinding
 
 class KaryawanActivity : AppCompatActivity() {
@@ -24,7 +20,7 @@ class KaryawanActivity : AppCompatActivity() {
         binding = ActivityKaryawanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        // Set up adapter with edit and delete click listeners
         adapter = KaryawanAdapter(
             onEditClick = { karyawan -> showEditDialog(karyawan) },
             onDeleteClick = { karyawan -> showDeleteDialog(karyawan) }
@@ -32,11 +28,13 @@ class KaryawanActivity : AppCompatActivity() {
         binding.recyclerviewKaryawan.adapter = adapter
         binding.recyclerviewKaryawan.layoutManager = LinearLayoutManager(this)
 
+        // Initialize ViewModel
         karyawanViewModel = ViewModelProvider(this).get(KaryawanViewModel::class.java)
-        karyawanViewModel.allKaryawan.observe(this, { karyawan ->
-            karyawan?.let { adapter.setKaryawan(it) }
+        karyawanViewModel.allKaryawan.observe(this, { karyawanList ->
+            karyawanList?.let { adapter.submitList(it) }
         })
 
+        // Set up add button to show the add dialog
         binding.buttonSaveKaryawan.setOnClickListener {
             showAddDialog()
         }
@@ -71,7 +69,6 @@ class KaryawanActivity : AppCompatActivity() {
         val editTextJenisKelamin = dialog.findViewById<EditText>(R.id.editTextJenisKelaminKaryawan)
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
-
 
         editTextNama.setText(karyawan.nama_karyawan)
         editTextJenisKelamin.setText(karyawan.jenis_kelamin)

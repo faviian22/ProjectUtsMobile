@@ -1,17 +1,16 @@
 package com.example.projectutsmobile
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectutsmobile.databinding.ItemKaryawanBinding
 
 class KaryawanAdapter(
     private val onEditClick: (Karyawan) -> Unit,
     private val onDeleteClick: (Karyawan) -> Unit
-) : RecyclerView.Adapter<KaryawanAdapter.KaryawanViewHolder>() {
-
-    private var karyawanList = emptyList<Karyawan>()
+) : ListAdapter<Karyawan, KaryawanAdapter.KaryawanViewHolder>(KaryawanDiffCallback()) {
 
     class KaryawanViewHolder(val binding: ItemKaryawanBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,8 +20,7 @@ class KaryawanAdapter(
     }
 
     override fun onBindViewHolder(holder: KaryawanViewHolder, position: Int) {
-        val currentKaryawan = karyawanList[position]
-
+        val currentKaryawan = getItem(position)
 
         holder.binding.textViewNamaKaryawan.text = currentKaryawan.nama_karyawan
         holder.binding.textViewJenisKelaminKaryawan.text = currentKaryawan.jenis_kelamin
@@ -37,12 +35,15 @@ class KaryawanAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return karyawanList.size
-    }
+    class KaryawanDiffCallback : DiffUtil.ItemCallback<Karyawan>() {
+        override fun areItemsTheSame(oldItem: Karyawan, newItem: Karyawan): Boolean {
+            // Replace `id_karyawan` with the actual unique identifier in the `Karyawan` class
+            return oldItem.id_karyawan == newItem.id_karyawan
+        }
 
-    fun setKaryawan(karyawans: List<Karyawan>) {
-        this.karyawanList = karyawans
-        notifyDataSetChanged()
+        override fun areContentsTheSame(oldItem: Karyawan, newItem: Karyawan): Boolean {
+            // Compare the full contents of the item
+            return oldItem == newItem
+        }
     }
 }
