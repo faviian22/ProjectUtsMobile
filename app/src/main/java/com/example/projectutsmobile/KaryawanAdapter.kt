@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectutsmobile.databinding.ItemKaryawanBinding
 
-
-
 class KaryawanAdapter(
     private val onEditClick: (Karyawan) -> Unit,
     private val onDeleteClick: (Karyawan) -> Unit

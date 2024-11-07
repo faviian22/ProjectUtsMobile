@@ -31,7 +31,6 @@ class SuplierAdapter(
         this.suplierList = suplierList
         notifyDataSetChanged()
     }
-
     inner class SuplierViewHolder(private val binding: ItemSuplierBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

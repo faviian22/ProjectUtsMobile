@@ -41,17 +41,14 @@ class SuplierActivity : AppCompatActivity() {
             showAddDialog()
         }
     }
-
     private fun showAddDialog() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_add_suplier)
-
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaSuplier)
         val editTextNoTlpn = dialog.findViewById<EditText>(R.id.editTextNoTlpn)
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatSuplier)
         val editTextNamaProduk = dialog.findViewById<EditText>(R.id.editTextNamaProduk)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveSuplier)
-
         buttonSave.setOnClickListener {
             val nama = editTextNama.text.toString()
             val noTlpn = editTextNoTlpn.text.toString()
@@ -61,26 +58,21 @@ class SuplierActivity : AppCompatActivity() {
             suplierViewModel.insert(suplier)
             dialog.dismiss()
         }
-
         dialog.show()
     }
 
     private fun showEditDialog(suplier: Suplier) {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_edit_suplier)
-
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaSuplier)
         val editTextNoTlpn = dialog.findViewById<EditText>(R.id.editTextNoTlpn)
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatSuplier)
         val editTextNamaProduk = dialog.findViewById<EditText>(R.id.editTextNamaProduk)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveSuplier)
-
-
         editTextNama.setText(suplier.nama_suplier)
         editTextNoTlpn.setText(suplier.no_Tlpn)
         editTextAlamat.setText(suplier.alamat_suplier)
         editTextNamaProduk.setText(suplier.nama_produk)
-
         buttonSave.setOnClickListener {
             val idSuplier = suplier.id_suplier
             val namaSuplier = editTextNama.text.toString()
@@ -91,7 +83,6 @@ class SuplierActivity : AppCompatActivity() {
             suplierViewModel.update(suplierBaru)
             dialog.dismiss()
         }
-
         dialog.show()
     }
 

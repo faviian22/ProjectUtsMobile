@@ -2,17 +2,16 @@ package com.example.projectutsmobile
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectutsmobile.databinding.ItemProdukBinding
-import com.example.projectutsmobile.Produk
-
+import extention.toFormattedPrice
 
 class ProdukAdapter(
     private val onEdit: (Produk) -> Unit,
     private val onDelete: (Produk) -> Unit
-) : RecyclerView.Adapter<ProdukAdapter.ProdukViewHolder>() {
-
-    private var produkList = emptyList<Produk>()
+) : ListAdapter<Produk, ProdukAdapter.ProdukViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdukViewHolder {
         val binding = ItemProdukBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,41 +19,33 @@ class ProdukAdapter(
     }
 
     override fun onBindViewHolder(holder: ProdukViewHolder, position: Int) {
-        val currentProduk = produkList[position]
+        val currentProduk = getItem(position)
         holder.bind(currentProduk, onEdit, onDelete)
     }
 
-    override fun getItemCount(): Int {
-        return produkList.size
-    }
-
-    fun submitList(produkList: List<Produk>) {
-        this.produkList = produkList
-        notifyDataSetChanged()
-    }
     inner class ProdukViewHolder(private val binding: ItemProdukBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(produk: Produk, onEdit: (Produk) -> Unit, onDelete: (Produk) -> Unit) {
             binding.textViewNamaProduk.text = produk.namaProduk
-            binding.textViewStokProduk.text = produk.stokProduk.toString()
-            binding.textViewSatuanProduk.text = produk.satuanProduk
-            binding.textViewHargaProduk.text = produk.hargaProduk.toString()
+            binding.textViewStokProduk.text = produk.stokProduk.toString()  // Menampilkan stok produk
+            // Menampilkan satuan yang diformat tanpa mengaitkan stok
+            binding.textViewSatuanProduk.text = produk.satuanProduk // Menggunakan satuan produk tanpa stok
+            // Menampilkan harga yang diformat
+            binding.textViewHargaProduk.text = produk.hargaProduk.toFormattedPrice()
 
-            binding.buttonEdit.setOnClickListener {
-                val produkBaru = Produk(
-                    produk.id_produk,
-                    produk.namaProduk,
-                    produk.stokProduk,
-                    produk.satuanProduk,
-                    produk.hargaProduk
-                )
-                onEdit(produkBaru)
-            }
+            binding.buttonEdit.setOnClickListener { onEdit(produk) }
+            binding.buttonDelete.setOnClickListener { onDelete(produk) }
+        }
+    }
 
-            binding.buttonDelete.setOnClickListener {
-                onDelete(produk)
-            }
+    class DiffCallback : DiffUtil.ItemCallback<Produk>() {
+        override fun areItemsTheSame(oldItem: Produk, newItem: Produk): Boolean {
+            return oldItem.id_produk == newItem.id_produk
+        }
+
+        override fun areContentsTheSame(oldItem: Produk, newItem: Produk): Boolean {
+            return oldItem == newItem
         }
     }
 }

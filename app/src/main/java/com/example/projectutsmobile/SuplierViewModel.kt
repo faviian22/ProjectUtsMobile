@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 class SuplierViewModel(application: Application) : AndroidViewModel(application) {
 
     private val suplierDao = BakeryDatabase.getDatabase(application).suplierDao()
