@@ -29,10 +29,14 @@ class KaryawanActivity : AppCompatActivity() {
         binding.recyclerviewKaryawan.adapter = adapter
 
         // Set up GridLayoutManager
-        val manager = GridLayoutManager(this, 2)
+        val manager = GridLayoutManager(this, 2) // Two columns
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return 1 // All items will have the same span
+                // Make headers span both columns
+                return when (adapter.getItemViewType(position)) {
+                    KaryawanAdapter.VIEW_TYPE_HEADER_MALE, KaryawanAdapter.VIEW_TYPE_HEADER_FEMALE -> 2
+                    else -> 1
+                }
             }
         }
         binding.recyclerviewKaryawan.layoutManager = manager
