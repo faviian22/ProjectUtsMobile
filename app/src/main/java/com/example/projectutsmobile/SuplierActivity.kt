@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectutsmobile.databinding.ActivitySuplierBinding
-import com.example.app.adapter.SuplierAdapter
 
 class SuplierActivity : AppCompatActivity() {
 
@@ -32,7 +31,11 @@ class SuplierActivity : AppCompatActivity() {
         // Initialize ViewModel and observe data
         suplierViewModel = ViewModelProvider(this).get(SuplierViewModel::class.java)
         suplierViewModel.allSuplier.observe(this) { suplierList ->
-            suplierList?.let { adapter.submitList(it) }
+            suplierList?.let {
+                val sortedList = it.sortedBy { suplier -> suplier.nama_suplier }
+                val listWithHeader = listOf("header") + sortedList
+                adapter.submitList(listWithHeader)
+            }
         }
 
         // Button to add new supplier
@@ -108,4 +111,5 @@ class SuplierActivity : AppCompatActivity() {
         }
         dialog.show()
     }
+
 }

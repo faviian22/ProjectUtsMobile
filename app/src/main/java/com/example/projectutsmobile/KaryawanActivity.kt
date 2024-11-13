@@ -4,9 +4,10 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.projectutsmobile.databinding.ActivityKaryawanBinding
 
 class KaryawanActivity : AppCompatActivity() {
@@ -26,9 +27,17 @@ class KaryawanActivity : AppCompatActivity() {
             onDeleteClick = { karyawan -> showDeleteDialog(karyawan) }
         )
         binding.recyclerviewKaryawan.adapter = adapter
-        binding.recyclerviewKaryawan.layoutManager = LinearLayoutManager(this)
 
-        // Initialize ViewModel
+        // Set up GridLayoutManager
+        val manager = GridLayoutManager(this, 2)
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return 1 // All items will have the same span
+            }
+        }
+        binding.recyclerviewKaryawan.layoutManager = manager
+
+        // Initialize ViewModel and observe data
         karyawanViewModel = ViewModelProvider(this).get(KaryawanViewModel::class.java)
         karyawanViewModel.allKaryawan.observe(this, { karyawanList ->
             karyawanList?.let { adapter.submitList(it) }
@@ -41,8 +50,7 @@ class KaryawanActivity : AppCompatActivity() {
     }
 
     private fun showAddDialog() {
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_add_karyawan)
+        val dialog = createDialog(R.layout.dialog_add_karyawan)
 
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
         val editTextJenisKelamin = dialog.findViewById<EditText>(R.id.editTextJenisKelaminKaryawan)
@@ -50,20 +58,23 @@ class KaryawanActivity : AppCompatActivity() {
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
 
         buttonSave.setOnClickListener {
-            val nama = editTextNama.text.toString()
-            val jenisKelamin = editTextJenisKelamin.text.toString()
-            val alamat = editTextAlamat.text.toString()
-            val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat)
-            karyawanViewModel.insert(karyawanBaru)
-            dialog.dismiss()
+            val nama = editTextNama.text.toString().trim()
+            val jenisKelamin = editTextJenisKelamin.text.toString().trim()
+            val alamat = editTextAlamat.text.toString().trim()
+            if (nama.isNotEmpty() && jenisKelamin.isNotEmpty() && alamat.isNotEmpty()) {
+                val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat)
+                karyawanViewModel.insert(karyawanBaru)
+                dialog.dismiss()
+            } else {
+                showToast("Please fill all fields", Toast.LENGTH_LONG)
+            }
         }
 
         dialog.show()
     }
 
     private fun showEditDialog(karyawan: Karyawan) {
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_edit_karyawan)
+        val dialog = createDialog(R.layout.dialog_edit_karyawan)
 
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
         val editTextJenisKelamin = dialog.findViewById<EditText>(R.id.editTextJenisKelaminKaryawan)
@@ -75,33 +86,45 @@ class KaryawanActivity : AppCompatActivity() {
         editTextAlamat.setText(karyawan.alamat_karyawan)
 
         buttonSave.setOnClickListener {
-            val nama = editTextNama.text.toString()
-            val jenisKelamin = editTextJenisKelamin.text.toString()
-            val alamat = editTextAlamat.text.toString()
-            val karyawanUpdate = Karyawan(karyawan.id_karyawan, nama, jenisKelamin, alamat)
-            karyawanViewModel.update(karyawanUpdate)
-            dialog.dismiss()
+            val updatedKaryawan = karyawan.copy(
+                nama_karyawan = editTextNama.text.toString().trim(),
+                jenis_kelamin = editTextJenisKelamin.text.toString().trim(),
+                alamat_karyawan = editTextAlamat.text.toString().trim()
+            )
+            if (updatedKaryawan.nama_karyawan.isNotEmpty() && updatedKaryawan.jenis_kelamin.isNotEmpty() && updatedKaryawan.alamat_karyawan.isNotEmpty()) {
+                karyawanViewModel.update(updatedKaryawan)
+                dialog.dismiss()
+            } else {
+                showToast("Please fill all fields", Toast.LENGTH_LONG)
+            }
         }
 
         dialog.show()
     }
 
     private fun showDeleteDialog(karyawan: Karyawan) {
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_delete_karyawan)
+        val dialog = createDialog(R.layout.dialog_delete_karyawan)
 
         val buttonCancel = dialog.findViewById<Button>(R.id.buttonCancel)
         val buttonConfirmDelete = dialog.findViewById<Button>(R.id.buttonConfirmDelete)
 
-        buttonCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-
+        buttonCancel.setOnClickListener { dialog.dismiss() }
         buttonConfirmDelete.setOnClickListener {
             karyawanViewModel.delete(karyawan)
             dialog.dismiss()
         }
-
         dialog.show()
+    }
+
+    // Helper function to show Toast messages
+    private fun showToast(message: String, length: Int) {
+        Toast.makeText(this, message, length).show()
+    }
+
+    // Helper function to create dialogs
+    private fun createDialog(layoutResId: Int): Dialog {
+        val dialog = Dialog(this)
+        dialog.setContentView(layoutResId)
+        return dialog
     }
 }

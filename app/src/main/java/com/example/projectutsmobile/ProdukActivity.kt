@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectutsmobile.databinding.ActivityProdukBinding
-import extention.toFormattedPrice // Mengimpor ekstensi untuk memformat harga
 
 class ProdukActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProdukBinding
@@ -20,33 +19,28 @@ class ProdukActivity : AppCompatActivity() {
         binding = ActivityProdukBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupRecyclerView()  // Set up RecyclerView
-        setupViewModel()     // Set up ViewModel
+        setupRecyclerView()
+        setupViewModel()
 
-        // Tombol untuk menambahkan produk
         binding.buttonSaveProduk.setOnClickListener {
             showAddDialog()
         }
     }
 
     private fun setupRecyclerView() {
-        // Menginisialisasi adapter dan layout manager untuk RecyclerView
         adapter = ProdukAdapter(
             onEdit = { produk -> showEditDialog(produk) },
             onDelete = { produk -> showDeleteDialog(produk) }
         )
-
-        // Mengatur layout manager untuk RecyclerView
         binding.recyclerviewProduk.layoutManager = LinearLayoutManager(this)
         binding.recyclerviewProduk.adapter = adapter
     }
 
     private fun setupViewModel() {
-        // Setup ViewModel untuk mengambil data produk
         produkViewModel = ViewModelProvider(this).get(ProdukViewModel::class.java)
-        produkViewModel.allProduk.observe(this, { produkList ->
-            produkList?.let { adapter.submitList(it) }
-        })
+        produkViewModel.allProduk.observe(this) { produkList ->
+            adapter.submitList(produkList)
+        }
     }
 
     private fun showAddDialog() {
@@ -64,13 +58,18 @@ class ProdukActivity : AppCompatActivity() {
             val stok = editTextStok.text.toString().toIntOrNull() ?: 0
             val satuan = editTextSatuan.text.toString().trim()
             val harga = editTextHarga.text.toString().toIntOrNull() ?: 0
-            val produk = Produk(0, nama, stok, satuan, harga)
-            produkViewModel.insert(produk) // Menambahkan produk baru
-            dialog.dismiss()
-        }
 
+            if (nama.isNotEmpty() && stok > 0 && satuan.isNotEmpty() && harga > 0) {
+                val produk = Produk(0, nama, stok, satuan, harga)
+                produkViewModel.insert(produk)
+                dialog.dismiss()
+            } else {
+                editTextNama.error = "Nama tidak boleh kosong!"
+            }
+        }
         dialog.show()
     }
+
 
     private fun showEditDialog(produk: Produk) {
         val dialog = Dialog(this)
@@ -82,25 +81,21 @@ class ProdukActivity : AppCompatActivity() {
         val editTextHarga = dialog.findViewById<EditText>(R.id.editTextHargaProduk)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveProduk)
 
-        // Mengisi EditText dengan data yang ada di produk
         editTextNama.setText(produk.namaProduk)
         editTextStok.setText(produk.stokProduk.toString())
         editTextSatuan.setText(produk.satuanProduk)
         editTextHarga.setText(produk.hargaProduk.toString())
 
         buttonSave.setOnClickListener {
-            // Membuat produk baru dengan data yang telah diubah
             val updatedProduk = produk.copy(
                 namaProduk = editTextNama.text.toString().trim(),
                 stokProduk = editTextStok.text.toString().toIntOrNull() ?: produk.stokProduk,
                 satuanProduk = editTextSatuan.text.toString().trim(),
                 hargaProduk = editTextHarga.text.toString().toIntOrNull() ?: produk.hargaProduk
             )
-
-            produkViewModel.update(updatedProduk) // Memperbarui produk
+            produkViewModel.update(updatedProduk)
             dialog.dismiss()
         }
-
         dialog.show()
     }
 
@@ -111,15 +106,11 @@ class ProdukActivity : AppCompatActivity() {
         val buttonCancel = dialog.findViewById<Button>(R.id.buttonCancel)
         val buttonConfirmDelete = dialog.findViewById<Button>(R.id.buttonConfirmDelete)
 
-        buttonCancel.setOnClickListener {
-            dialog.dismiss() // Menutup dialog jika tombol cancel ditekan
-        }
-
+        buttonCancel.setOnClickListener { dialog.dismiss() }
         buttonConfirmDelete.setOnClickListener {
-            produkViewModel.delete(produk) // Menghapus produk
+            produkViewModel.delete(produk)
             dialog.dismiss()
         }
-
         dialog.show()
     }
 }
