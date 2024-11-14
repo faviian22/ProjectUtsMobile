@@ -24,21 +24,20 @@ class KaryawanActivity : AppCompatActivity() {
         binding = ActivityKaryawanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up adapter with edit and delete click listeners
+        // Set up the adapter with edit and delete click listeners
         adapter = KaryawanAdapter(
             onEditClick = { karyawan -> showEditDialog(karyawan) },
             onDeleteClick = { karyawan -> showDeleteDialog(karyawan) }
         )
         binding.recyclerviewKaryawan.adapter = adapter
 
-        // Set up GridLayoutManager
+        // Set up GridLayoutManager with support for headers
         val manager = GridLayoutManager(this, 2) // Two columns
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                // Make headers span both columns
                 return when (adapter.getItemViewType(position)) {
-                    KaryawanAdapter.VIEW_TYPE_HEADER, KaryawanAdapter.VIEW_TYPE_HEADER -> 2
-                    else -> 1
+                    KaryawanAdapter.VIEW_TYPE_HEADER -> 2 // Headers span both columns
+                    else -> 1 // Regular items take one column
                 }
             }
         }
@@ -47,7 +46,9 @@ class KaryawanActivity : AppCompatActivity() {
         // Initialize ViewModel and observe data
         karyawanViewModel = ViewModelProvider(this).get(KaryawanViewModel::class.java)
         karyawanViewModel.allKaryawan.observe(this) { karyawanList ->
-            karyawanList?.let { adapter.submitList(it) }
+            karyawanList?.let {
+                adapter.submitList(it) // Submit the list of karyawan to the adapter
+            }
         }
 
         // Set up add button to show the add dialog
@@ -61,7 +62,7 @@ class KaryawanActivity : AppCompatActivity() {
         Toast.makeText(this, message, length).show()
     }
 
-    // Helper function to create dialogs
+    // Helper function to create and return a dialog
     private fun createDialog(layoutResId: Int): Dialog {
         val dialog = Dialog(this)
         dialog.setContentView(layoutResId)
@@ -87,25 +88,29 @@ class KaryawanActivity : AppCompatActivity() {
     }
 
     // Show dialog for adding new employee
+    // In KaryawanActivity.kt
     private fun showAddDialog() {
         val dialog = createDialog(R.layout.dialog_add_karyawan)
 
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
-        val spinnerJenisKelamin = dialog.findViewById<Spinner>(R.id.spinnerJenisKelaminKaryawan)
+        val spinnerJenisKelamin = dialog.findViewById<Spinner>(R.id.spinnerJenisKelamin)
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
 
-        // Set up spinner with gender options
+        // Ensure spinner setup
         setupGenderSpinner(spinnerJenisKelamin)
 
         buttonSave.setOnClickListener {
             val nama = editTextNama.text.toString().trim()
-            val jenisKelamin = spinnerJenisKelamin.selectedItem.toString()
+            val jenisKelamin = spinnerJenisKelamin.selectedItem?.toString().orEmpty()
             val alamat = editTextAlamat.text.toString().trim()
+
             if (isValidInput(nama, jenisKelamin, alamat)) {
+                // Create new Karyawan object
                 val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat)
-                karyawanViewModel.insert(karyawanBaru)
-                dialog.dismiss()
+                karyawanViewModel.insert(karyawanBaru) // Insert into database
+                dialog.dismiss() // Close the dialog after insert
+                showToast("Karyawan added successfully", Toast.LENGTH_SHORT)
             } else {
                 showToast("Please fill all fields", Toast.LENGTH_LONG)
             }
@@ -114,7 +119,6 @@ class KaryawanActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    // Show dialog for editing an employee
     private fun showEditDialog(karyawan: Karyawan) {
         val dialog = createDialog(R.layout.dialog_edit_karyawan)
 
@@ -123,23 +127,13 @@ class KaryawanActivity : AppCompatActivity() {
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
         val buttonUpdate = dialog.findViewById<Button>(R.id.buttonEdit)
 
-        // Set dialog title based on gender
-        val genderOptions = resources.getStringArray(R.array.jenis_kelamin_options)
-        val dialogTitle = if (karyawan.jenis_kelamin == genderOptions[0]) {
-            getString(R.string.edit_male)
-        } else {
-            getString(R.string.edit_female)
-        }
-        dialog.setTitle(dialogTitle)
+        setupGenderSpinner(spinnerJenisKelamin)
 
-        // Set existing values
+        // Pre-fill data
         editTextNama.setText(karyawan.nama_karyawan)
         editTextAlamat.setText(karyawan.alamat_karyawan)
 
-        // Set up spinner with gender options
-        setupGenderSpinner(spinnerJenisKelamin)
-
-        // Set the selected item in the spinner based on the karyawan's gender
+        val genderOptions = resources.getStringArray(R.array.jenis_kelamin_options)
         val genderIndex = genderOptions.indexOf(karyawan.jenis_kelamin)
         if (genderIndex >= 0) {
             spinnerJenisKelamin.setSelection(genderIndex)
@@ -151,9 +145,11 @@ class KaryawanActivity : AppCompatActivity() {
                 jenis_kelamin = spinnerJenisKelamin.selectedItem.toString(),
                 alamat_karyawan = editTextAlamat.text.toString().trim()
             )
+
             if (isValidInput(updatedKaryawan.nama_karyawan, updatedKaryawan.jenis_kelamin, updatedKaryawan.alamat_karyawan)) {
                 karyawanViewModel.update(updatedKaryawan)
                 dialog.dismiss()
+                showToast("Karyawan updated successfully", Toast.LENGTH_SHORT)
             } else {
                 showToast("Please fill all fields", Toast.LENGTH_LONG)
             }
@@ -161,6 +157,7 @@ class KaryawanActivity : AppCompatActivity() {
 
         dialog.show()
     }
+
 
     // Show dialog for deleting an employee
     private fun showDeleteDialog(karyawan: Karyawan) {

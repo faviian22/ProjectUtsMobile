@@ -6,6 +6,7 @@
     android:padding="16dp"
     android:background="@color/backgroundColor">
 
+    <!-- Bagian Informasi Supplier -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,6 +30,7 @@
             android:textColor="@color/valueTextColor" />
     </LinearLayout>
 
+    <!-- Bagian Nomor Telepon -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,6 +54,7 @@
             android:textColor="@color/valueTextColor" />
     </LinearLayout>
 
+    <!-- Bagian Alamat Supplier -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,6 +78,7 @@
             android:textColor="@color/valueTextColor" />
     </LinearLayout>
 
+    <!-- Bagian Nama Produk -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,37 +102,34 @@
             android:textColor="@color/valueTextColor" />
     </LinearLayout>
 
+    <!-- Tombol Edit dan Delete -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <ImageButton
             android:id="@+id/buttonEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
             android:contentDescription="Edit"
-            android:src="@drawable/ic_edit"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:maxWidth="32dp"
-            android:maxHeight="32dp" /> <!-- Reduced size -->
+            android:src="@drawable/ic_edit"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <ImageButton
             android:id="@+id/buttonDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_delete"
-            android:contentDescription="Hapus"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Delete"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:maxWidth="32dp"
-            android:maxHeight="32dp" /> <!-- Reduced size -->
-
+            android:src="@drawable/ic_delete"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
 </LinearLayout>

@@ -95,7 +95,7 @@ class SuplierAdapter(
             }
         }
 
-        @SuppressLint("DiffUtilEquals")
+
         override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
             return oldItem == newItem
         }
