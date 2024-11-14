@@ -6,4 +6,6 @@
     </string-array>
     <string name="edit_male">Edit Karyawan Laki-Laki</string>
     <string name="edit_female">Edit Karyawan Perempuan</string>
+    <string name="edit_button">Edit</string>
+    <string name="delete_button">Delete</string>
 </resources>
