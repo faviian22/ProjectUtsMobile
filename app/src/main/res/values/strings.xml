@@ -4,4 +4,6 @@
         <item>Laki-Laki</item>
         <item>Perempuan</item>
     </string-array>
+    <string name="edit_male">Edit Karyawan Laki-Laki</string>
+    <string name="edit_female">Edit Karyawan Perempuan</string>
 </resources>

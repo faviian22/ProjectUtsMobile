@@ -1,52 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/editTextNamaKaryawan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@android:color/white"
-        android:elevation="4dp">
+        android:hint="Nama Karyawan"
+        android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/editTextNamaKaryawan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama Karyawan"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
+    <Spinner
+        android:id="@+id/spinnerJenisKelaminKaryawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" />
 
-        <EditText
-            android:id="@+id/editTextJenisKelaminKaryawan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Jenis Kelamin"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
+    <EditText
+        android:id="@+id/editTextAlamatKaryawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Alamat"
+        android:layout_marginTop="12dp"
+        android:inputType="textPostalAddress" />
 
-        <EditText
-            android:id="@+id/editTextAlamatKaryawan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Alamat Karyawan"
-            android:padding="12dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/edit_text_background" />
-
-        <Button
-            android:id="@+id/buttonSaveKaryawan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Simpan"
-            android:padding="12dp"
-            android:backgroundTint="@android:color/holo_blue_light"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
-    </LinearLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

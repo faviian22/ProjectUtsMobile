@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -36,7 +37,7 @@ class KaryawanActivity : AppCompatActivity() {
             override fun getSpanSize(position: Int): Int {
                 // Make headers span both columns
                 return when (adapter.getItemViewType(position)) {
-                    KaryawanAdapter.VIEW_TYPE_HEADER_MALE, KaryawanAdapter.VIEW_TYPE_HEADER_FEMALE -> 2
+                    KaryawanAdapter.VIEW_TYPE_HEADER, KaryawanAdapter.VIEW_TYPE_HEADER -> 2
                     else -> 1
                 }
             }
@@ -45,98 +46,14 @@ class KaryawanActivity : AppCompatActivity() {
 
         // Initialize ViewModel and observe data
         karyawanViewModel = ViewModelProvider(this).get(KaryawanViewModel::class.java)
-        karyawanViewModel.allKaryawan.observe(this, { karyawanList ->
+        karyawanViewModel.allKaryawan.observe(this) { karyawanList ->
             karyawanList?.let { adapter.submitList(it) }
-        })
+        }
 
         // Set up add button to show the add dialog
         binding.buttonSaveKaryawan.setOnClickListener {
             showAddDialog()
         }
-    }
-
-    private fun showAddDialog() {
-        val dialog = createDialog(R.layout.dialog_add_karyawan)
-
-        val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
-        val spinnerJenisKelamin = dialog.findViewById<Spinner>(R.id.spinnerJenisKelaminKaryawan)
-        val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
-        val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
-
-        // Set up spinner with gender options
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.jenis_kelamin_options,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerJenisKelamin.adapter = adapter
-        }
-
-        buttonSave.setOnClickListener {
-            val nama = editTextNama.text.toString().trim()
-            val jenisKelamin = spinnerJenisKelamin.selectedItem.toString()
-            val alamat = editTextAlamat.text.toString().trim()
-            if (nama.isNotEmpty() && jenisKelamin.isNotEmpty() && alamat.isNotEmpty()) {
-                val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat)
-                karyawanViewModel.insert(karyawanBaru)
-                dialog.dismiss()
-            } else {
-                showToast("Please fill all fields", Toast.LENGTH_LONG)
-            }
-        }
-
-        dialog.show()
-    }
-
-
-    private fun showEditDialog(karyawan: Karyawan) {
-        val dialog = createDialog(R.layout.dialog_edit_karyawan)
-
-        val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
-        val spinnerJenisKelamin = dialog.findViewById<Spinner>(R.id.spinnerJenisKelaminKaryawan)
-        val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
-        val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
-
-        editTextNama.setText(karyawan.nama_karyawan)
-        editTextAlamat.setText(karyawan.alamat_karyawan)
-
-        // Set the selected item in the spinner based on the karyawan's gender
-        val jenisKelaminOptions = resources.getStringArray(R.array.jenis_kelamin_options)
-        val index = jenisKelaminOptions.indexOf(karyawan.jenis_kelamin)
-        if (index >= 0) {
-            spinnerJenisKelamin.setSelection(index)
-        }
-
-        buttonSave.setOnClickListener {
-            val updatedKaryawan = karyawan.copy(
-                nama_karyawan = editTextNama.text.toString().trim(),
-                jenis_kelamin = spinnerJenisKelamin.selectedItem.toString(),
-                alamat_karyawan = editTextAlamat.text.toString().trim()
-            )
-            if (updatedKaryawan.nama_karyawan.isNotEmpty() && updatedKaryawan.jenis_kelamin.isNotEmpty() && updatedKaryawan.alamat_karyawan.isNotEmpty()) {
-                karyawanViewModel.update(updatedKaryawan)
-                dialog.dismiss()
-            } else {
-                showToast("Please fill all fields", Toast.LENGTH_LONG)
-            }
-        }
-
-        dialog.show()
-    }
-
-    private fun showDeleteDialog(karyawan: Karyawan) {
-        val dialog = createDialog(R.layout.dialog_delete_karyawan)
-
-        val buttonCancel = dialog.findViewById<Button>(R.id.buttonCancel)
-        val buttonConfirmDelete = dialog.findViewById<Button>(R.id.buttonConfirmDelete)
-
-        buttonCancel.setOnClickListener { dialog.dismiss() }
-        buttonConfirmDelete.setOnClickListener {
-            karyawanViewModel.delete(karyawan)
-            dialog.dismiss()
-        }
-        dialog.show()
     }
 
     // Helper function to show Toast messages
@@ -148,6 +65,112 @@ class KaryawanActivity : AppCompatActivity() {
     private fun createDialog(layoutResId: Int): Dialog {
         val dialog = Dialog(this)
         dialog.setContentView(layoutResId)
+        dialog.setCancelable(true)
         return dialog
+    }
+
+    // Function to setup gender spinner
+    private fun setupGenderSpinner(spinner: Spinner) {
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.jenis_kelamin_options,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+    }
+
+    // Function to validate input fields
+    private fun isValidInput(nama: String, jenisKelamin: String, alamat: String): Boolean {
+        return nama.isNotEmpty() && jenisKelamin.isNotEmpty() && alamat.isNotEmpty()
+    }
+
+    // Show dialog for adding new employee
+    private fun showAddDialog() {
+        val dialog = createDialog(R.layout.dialog_add_karyawan)
+
+        val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
+        val spinnerJenisKelamin = dialog.findViewById<Spinner>(R.id.spinnerJenisKelaminKaryawan)
+        val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
+        val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
+
+        // Set up spinner with gender options
+        setupGenderSpinner(spinnerJenisKelamin)
+
+        buttonSave.setOnClickListener {
+            val nama = editTextNama.text.toString().trim()
+            val jenisKelamin = spinnerJenisKelamin.selectedItem.toString()
+            val alamat = editTextAlamat.text.toString().trim()
+            if (isValidInput(nama, jenisKelamin, alamat)) {
+                val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat)
+                karyawanViewModel.insert(karyawanBaru)
+                dialog.dismiss()
+            } else {
+                showToast("Please fill all fields", Toast.LENGTH_LONG)
+            }
+        }
+
+        dialog.show()
+    }
+
+    // Show dialog for editing an employee
+    private fun showEditDialog(karyawan: Karyawan) {
+        val dialog = createDialog(R.layout.dialog_edit_karyawan)
+
+        val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
+        val spinnerJenisKelamin = dialog.findViewById<Spinner>(R.id.spinnerJenisKelaminKaryawan)
+        val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
+        val buttonUpdate = dialog.findViewById<Button>(R.id.buttonEdit)
+
+        // Set dialog title based on gender
+        val genderOptions = resources.getStringArray(R.array.jenis_kelamin_options)
+        val dialogTitle = if (karyawan.jenis_kelamin == genderOptions[0]) {
+            getString(R.string.edit_male)
+        } else {
+            getString(R.string.edit_female)
+        }
+        dialog.setTitle(dialogTitle)
+
+        // Set existing values
+        editTextNama.setText(karyawan.nama_karyawan)
+        editTextAlamat.setText(karyawan.alamat_karyawan)
+
+        // Set up spinner with gender options
+        setupGenderSpinner(spinnerJenisKelamin)
+
+        // Set the selected item in the spinner based on the karyawan's gender
+        val genderIndex = genderOptions.indexOf(karyawan.jenis_kelamin)
+        if (genderIndex >= 0) {
+            spinnerJenisKelamin.setSelection(genderIndex)
+        }
+
+        buttonUpdate.setOnClickListener {
+            val updatedKaryawan = karyawan.copy(
+                nama_karyawan = editTextNama.text.toString().trim(),
+                jenis_kelamin = spinnerJenisKelamin.selectedItem.toString(),
+                alamat_karyawan = editTextAlamat.text.toString().trim()
+            )
+            if (isValidInput(updatedKaryawan.nama_karyawan, updatedKaryawan.jenis_kelamin, updatedKaryawan.alamat_karyawan)) {
+                karyawanViewModel.update(updatedKaryawan)
+                dialog.dismiss()
+            } else {
+                showToast("Please fill all fields", Toast.LENGTH_LONG)
+            }
+        }
+
+        dialog.show()
+    }
+
+    // Show dialog for deleting an employee
+    private fun showDeleteDialog(karyawan: Karyawan) {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Delete Employee")
+            .setMessage("Are you sure you want to delete this employee?")
+            .setPositiveButton("Delete") { _, _ ->
+                karyawanViewModel.delete(karyawan)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 }
