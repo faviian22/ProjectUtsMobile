@@ -1,10 +1,12 @@
 package com.example.projectutsmobile
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +41,7 @@ class SuplierAdapter(
         when (holder) {
             is HeaderViewHolder -> {
                 // Set any data for the header if needed
+                holder.bind()  // Update header content if necessary
             }
             is SuplierViewHolder -> {
                 val suplier = getItem(position) as Suplier
@@ -62,8 +65,9 @@ class SuplierAdapter(
         private val textViewNoTlpnSuplier: TextView = view.findViewById(R.id.textViewNoTlpn)
         private val textViewAlamatSuplier: TextView = view.findViewById(R.id.textViewAlamatSuplier)
         private val textViewNamaProduk: TextView = view.findViewById(R.id.textViewNamaProduk)
-        val buttonEdit: Button = view.findViewById(R.id.buttonEdit)
-        val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
+        // If you're using AppCompatImageButton, change to AppCompatImageButton
+        val buttonEdit: AppCompatImageButton = view.findViewById(R.id.buttonEdit)
+        val buttonDelete: AppCompatImageButton = view.findViewById(R.id.buttonDelete)
 
         fun bind(suplier: Suplier) {
             textViewNamaSuplier.text = suplier.nama_suplier
@@ -72,6 +76,7 @@ class SuplierAdapter(
             textViewNamaProduk.text = suplier.nama_produk
         }
     }
+
 
     inner class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val textViewHeader: TextView = view.findViewById(R.id.textViewHeader)
@@ -90,6 +95,7 @@ class SuplierAdapter(
             }
         }
 
+        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
             return oldItem == newItem
         }

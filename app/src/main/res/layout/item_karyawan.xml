@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,54 +8,80 @@
     android:padding="16dp"
     android:background="@color/backgroundColor">
 
-    <LinearLayout
+    <!-- Grid Layout to organize rows -->
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:elevation="2dp">
+        android:columnCount="2"
+        android:padding="8dp"
+        android:background="@color/white"
+        android:elevation="4dp">
+
+        <!-- Row for Name -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="start"
+            android:text="Nama:"
+            android:textSize="14sp"
+            android:textColor="@color/labelTextColor"
+            android:padding="8dp" />
 
         <TextView
             android:id="@+id/textViewNamaKaryawan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_columnWeight="1"
+            android:gravity="start"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            />
-    </LinearLayout>
+            android:padding="8dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:elevation="2dp">
+        <!-- Row for Gender -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="start"
+            android:text="Jenis Kelamin:"
+            android:textSize="14sp"
+            android:textColor="@color/labelTextColor"
+            android:padding="8dp" />
 
         <TextView
             android:id="@+id/textViewJenisKelaminKaryawan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_columnWeight="1"
+            android:gravity="start"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            />
-    </LinearLayout>
+            android:padding="8dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:elevation="2dp">
+        <!-- Row for Address -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="start"
+            android:text="Alamat:"
+            android:textSize="14sp"
+            android:textColor="@color/labelTextColor"
+            android:padding="8dp" />
 
         <TextView
             android:id="@+id/textViewAlamatKaryawan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_columnWeight="1"
+            android:gravity="start"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            />
-    </LinearLayout>
+            android:padding="8dp" />
+    </GridLayout>
 
+    <!-- Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

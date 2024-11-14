@@ -2,25 +2,27 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="24dp"
         android:background="@android:color/white"
-        android:elevation="4dp">
-
+        android:elevation="4dp"
+        android:layout_margin="16dp">
 
         <EditText
             android:id="@+id/editTextNamaProduk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama Produk"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
+            android:padding="14dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/edit_text_background"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editTextStokProduk"
@@ -28,37 +30,44 @@
             android:layout_height="wrap_content"
             android:hint="Stok Produk"
             android:inputType="number"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
+            android:padding="14dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/edit_text_background"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editTextSatuanProduk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Satuan Produk"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
+            android:padding="14dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/edit_text_background"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editTextHargaProduk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Harga Produk"
-            android:inputType="number"
-            android:padding="12dp"
+            android:inputType="numberDecimal"
+            android:padding="14dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/edit_text_background" />
+            android:background="@drawable/edit_text_background"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/buttonSaveProduk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Simpan"
-            android:padding="12dp"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:padding="14dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
             android:textColor="@android:color/white"
+            android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>
