@@ -19,8 +19,6 @@
     <color name="dividerColor">#DADADA</color> <!-- Light gray divider for subtle separation -->
 
     <!-- Buttons -->
-    <color name="editButtonColor">#005599</color> <!-- Light blue for edit actions -->
-    <color name="deleteButtonColor">#CC3333</color> <!-- Red for delete actions -->
 
     <!-- Text Colors -->
     <color name="primaryTextColor">#333333</color> <!-- Dark gray for main text -->
@@ -29,6 +27,13 @@
 
     <color name="labelTextColor">#616161</color> <!-- Dark gray for labels -->
     <color name="valueTextColor">#212121</color>
+
+    <!-- colors.xml -->
+    <color name="editButtonColor">#4CAF50</color> <!-- Hijau untuk tombol Edit -->
+    <color name="editButtonPressedColor">#388E3C</color> <!-- Lebih gelap untuk efek tekan -->
+    <color name="deleteButtonColor">#F44336</color> <!-- Merah untuk tombol Hapus -->
+    <color name="deleteButtonPressedColor">#D32F2F</color> <!-- Lebih gelap untuk efek tekan -->
+    <color name="shadowColor">#55000000</color> <!-- Abu-abu transparan untuk bayangan -->
 
 
 </resources>
