@@ -2,8 +2,10 @@ package com.example.projectutsmobile
 
 import android.app.Dialog
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -57,13 +59,23 @@ class KaryawanActivity : AppCompatActivity() {
         val dialog = createDialog(R.layout.dialog_add_karyawan)
 
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
-        val editTextJenisKelamin = dialog.findViewById<EditText>(R.id.editTextJenisKelaminKaryawan)
+        val spinnerJenisKelamin = dialog.findViewById<Spinner>(R.id.spinnerJenisKelaminKaryawan)
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
 
+        // Set up spinner with gender options
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.jenis_kelamin_options,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerJenisKelamin.adapter = adapter
+        }
+
         buttonSave.setOnClickListener {
             val nama = editTextNama.text.toString().trim()
-            val jenisKelamin = editTextJenisKelamin.text.toString().trim()
+            val jenisKelamin = spinnerJenisKelamin.selectedItem.toString()
             val alamat = editTextAlamat.text.toString().trim()
             if (nama.isNotEmpty() && jenisKelamin.isNotEmpty() && alamat.isNotEmpty()) {
                 val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat)
@@ -77,22 +89,29 @@ class KaryawanActivity : AppCompatActivity() {
         dialog.show()
     }
 
+
     private fun showEditDialog(karyawan: Karyawan) {
         val dialog = createDialog(R.layout.dialog_edit_karyawan)
 
         val editTextNama = dialog.findViewById<EditText>(R.id.editTextNamaKaryawan)
-        val editTextJenisKelamin = dialog.findViewById<EditText>(R.id.editTextJenisKelaminKaryawan)
+        val spinnerJenisKelamin = dialog.findViewById<Spinner>(R.id.spinnerJenisKelaminKaryawan)
         val editTextAlamat = dialog.findViewById<EditText>(R.id.editTextAlamatKaryawan)
         val buttonSave = dialog.findViewById<Button>(R.id.buttonSaveKaryawan)
 
         editTextNama.setText(karyawan.nama_karyawan)
-        editTextJenisKelamin.setText(karyawan.jenis_kelamin)
         editTextAlamat.setText(karyawan.alamat_karyawan)
+
+        // Set the selected item in the spinner based on the karyawan's gender
+        val jenisKelaminOptions = resources.getStringArray(R.array.jenis_kelamin_options)
+        val index = jenisKelaminOptions.indexOf(karyawan.jenis_kelamin)
+        if (index >= 0) {
+            spinnerJenisKelamin.setSelection(index)
+        }
 
         buttonSave.setOnClickListener {
             val updatedKaryawan = karyawan.copy(
                 nama_karyawan = editTextNama.text.toString().trim(),
-                jenis_kelamin = editTextJenisKelamin.text.toString().trim(),
+                jenis_kelamin = spinnerJenisKelamin.selectedItem.toString(),
                 alamat_karyawan = editTextAlamat.text.toString().trim()
             )
             if (updatedKaryawan.nama_karyawan.isNotEmpty() && updatedKaryawan.jenis_kelamin.isNotEmpty() && updatedKaryawan.alamat_karyawan.isNotEmpty()) {

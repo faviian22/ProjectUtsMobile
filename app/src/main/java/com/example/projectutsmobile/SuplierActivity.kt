@@ -28,7 +28,7 @@ class SuplierActivity : AppCompatActivity() {
         binding.recyclerviewSuplier.adapter = adapter
         binding.recyclerviewSuplier.layoutManager = LinearLayoutManager(this)
 
-        // Initialize ViewModel and observe data
+
         suplierViewModel = ViewModelProvider(this).get(SuplierViewModel::class.java)
         suplierViewModel.allSuplier.observe(this) { suplierList ->
             suplierList?.let {

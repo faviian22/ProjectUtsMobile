@@ -77,7 +77,7 @@ class SuplierAdapter(
         private val textViewHeader: TextView = view.findViewById(R.id.textViewHeader)
 
         fun bind() {
-            textViewHeader.text = "Supplier List" // You can customize the header text here
+            textViewHeader.text = "Supplier List"
         }
     }
 

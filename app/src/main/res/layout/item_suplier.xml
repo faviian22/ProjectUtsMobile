@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/backgroundColor">
+
+    <!-- Header Row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,10 +20,62 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Nama Suplier: "
+            android:text="Nama Supplier"
             android:textSize="14sp"
             android:textColor="@color/labelTextColor"
+            android:textStyle="bold"
+            android:gravity="center"
             android:padding="8dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="No. Telepon"
+            android:textSize="14sp"
+            android:textColor="@color/labelTextColor"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Alamat"
+            android:textSize="14sp"
+            android:textColor="@color/labelTextColor"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nama Produk"
+            android:textSize="14sp"
+            android:textColor="@color/labelTextColor"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dividerColor"
+        android:layout_marginVertical="8dp" />
+
+    <!-- Data Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_table_row"
+        android:padding="8dp"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/textViewNamaSuplier"
@@ -30,30 +84,7 @@
             android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            android:padding="8dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dividerColor"
-        android:layout_marginVertical="8dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/rounded_table_row"
-        android:padding="8dp"
-        android:elevation="2dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="No Telepon: "
-            android:textSize="14sp"
-            android:textColor="@color/labelTextColor"
+            android:gravity="center"
             android:padding="8dp" />
 
         <TextView
@@ -63,30 +94,7 @@
             android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            android:padding="8dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dividerColor"
-        android:layout_marginVertical="8dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/rounded_table_row"
-        android:padding="8dp"
-        android:elevation="2dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Alamat: "
-            android:textSize="14sp"
-            android:textColor="@color/labelTextColor"
+            android:gravity="center"
             android:padding="8dp" />
 
         <TextView
@@ -96,30 +104,7 @@
             android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            android:padding="8dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dividerColor"
-        android:layout_marginVertical="8dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/rounded_table_row"
-        android:padding="8dp"
-        android:elevation="2dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nama Produk: "
-            android:textSize="14sp"
-            android:textColor="@color/labelTextColor"
+            android:gravity="center"
             android:padding="8dp" />
 
         <TextView
@@ -129,9 +114,11 @@
             android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
+            android:gravity="center"
             android:padding="8dp" />
     </LinearLayout>
 
+    <!-- Action Buttons Row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -148,7 +135,8 @@
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginEnd="8dp"
-            android:padding="12dp" /> <!-- Padding for better touch target -->
+            android:padding="12dp"
+            android:contentDescription="Edit Button" />
 
         <Button
             android:id="@+id/buttonDelete"
@@ -159,7 +147,8 @@
             android:text="Hapus"
             android:textColor="@color/white"
             android:textSize="14sp"
-            android:padding="12dp" />
+            android:padding="12dp"
+            android:contentDescription="Delete Button" />
     </LinearLayout>
 
 </LinearLayout>

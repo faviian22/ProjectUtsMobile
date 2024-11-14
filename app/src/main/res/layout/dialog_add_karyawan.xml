@@ -16,14 +16,12 @@
         android:layout_marginBottom="16dp"
         android:background="@android:drawable/editbox_background" />
 
-    <EditText
-        android:id="@+id/editTextJenisKelaminKaryawan"
+    <Spinner
+        android:id="@+id/spinnerJenisKelaminKaryawan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Jenis Kelamin"
-        android:padding="10dp"
         android:layout_marginBottom="16dp"
-        android:background="@android:drawable/editbox_background" />
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/editTextAlamatKaryawan"

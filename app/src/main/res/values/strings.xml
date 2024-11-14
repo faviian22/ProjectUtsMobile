@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ProjectUtsMobile</string>
+    <string-array name="jenis_kelamin_options">
+        <item>Laki-Laki</item>
+        <item>Perempuan</item>
+    </string-array>
 </resources>
