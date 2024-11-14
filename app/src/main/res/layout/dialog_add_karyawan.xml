@@ -4,41 +4,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@android:color/white">
 
+    <!-- Nama Karyawan -->
     <EditText
         android:id="@+id/editTextNamaKaryawan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nama Karyawan"
-        android:padding="10dp"
+        android:padding="12dp"
         android:layout_marginBottom="16dp"
-        android:background="@android:drawable/editbox_background" />
+        android:background="@android:drawable/editbox_background"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Nama Karyawan field" />
 
+    <!-- Gender Spinner -->
     <Spinner
         android:id="@+id/spinnerJenisKelamin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:padding="10dp"
-        android:background="@android:drawable/editbox_background" />
+        android:padding="12dp"
+        android:background="@android:drawable/editbox_background"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Gender selection spinner" />
 
+    <!-- Alamat Karyawan -->
     <EditText
         android:id="@+id/editTextAlamatKaryawan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Alamat Karyawan"
-        android:padding="10dp"
+        android:padding="12dp"
         android:layout_marginBottom="24dp"
-        android:background="@android:drawable/editbox_background" />
+        android:background="@android:drawable/editbox_background"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Alamat Karyawan field" />
 
+    <!-- Save Button -->
     <Button
         android:id="@+id/buttonSaveKaryawan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Simpan"
         android:padding="12dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:textColor="@android:color/white"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Save button" />
+
 </LinearLayout>
