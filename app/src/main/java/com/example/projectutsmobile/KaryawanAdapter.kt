@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 
 class KaryawanAdapter(
@@ -85,8 +86,8 @@ class KaryawanAdapter(
         private val textViewNama: TextView = view.findViewById(R.id.textViewNamaKaryawan)
         private val textViewJenisKelamin: TextView = view.findViewById(R.id.textViewJenisKelaminKaryawan)
         private val textViewAlamat: TextView = view.findViewById(R.id.textViewAlamatKaryawan)
-        val buttonEdit: Button = view.findViewById(R.id.buttonEdit)
-        val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
+        val buttonEdit: AppCompatImageButton = view.findViewById(R.id.buttonEdit)
+        val buttonDelete: AppCompatImageButton = view.findViewById(R.id.buttonDelete)
 
         fun bind(karyawan: Karyawan) {
             textViewNama.text = karyawan.nama_karyawan

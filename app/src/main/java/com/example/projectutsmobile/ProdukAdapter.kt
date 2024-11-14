@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 
 class ProdukAdapter(
@@ -88,8 +89,9 @@ class ProdukAdapter(
         private val textHargaProduk: TextView = view.findViewById(R.id.textViewHargaProduk)
         private val textStokProduk: TextView = view.findViewById(R.id.textViewStokProduk)
         private val textSatuanProduk: TextView = view.findViewById(R.id.textViewSatuanProduk)
-        val buttonEdit: Button = view.findViewById(R.id.buttonEdit)
-        val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
+        val buttonEdit: AppCompatImageButton = view.findViewById(R.id.buttonEdit)
+        val buttonDelete: AppCompatImageButton = view.findViewById(R.id.buttonDelete)
+
 
         fun bind(produk: Produk) {
             textNamaProduk.text = produk.namaProduk

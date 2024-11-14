@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,108 +7,88 @@
     android:padding="16dp"
     android:background="@color/backgroundColor">
 
-    <!-- Grid Layout to organize rows -->
-    <GridLayout
+    <!-- Nama Karyawan -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:padding="8dp"
-        android:background="@color/white"
-        android:elevation="4dp">
-
-        <!-- Row for Name -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="start"
-            android:text="Nama:"
-            android:textSize="14sp"
-            android:textColor="@color/labelTextColor"
-            android:padding="8dp" />
+        android:orientation="horizontal"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/textViewNamaKaryawan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="start"
+            android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            android:padding="8dp" />
+            android:text="Nama Karyawan" />
+    </LinearLayout>
 
-        <!-- Row for Gender -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="start"
-            android:text="Jenis Kelamin:"
-            android:textSize="14sp"
-            android:textColor="@color/labelTextColor"
-            android:padding="8dp" />
+    <!-- Jenis Kelamin -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/textViewJenisKelaminKaryawan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="start"
+            android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            android:padding="8dp" />
+            android:text="Jenis Kelamin" />
+    </LinearLayout>
 
-        <!-- Row for Address -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="start"
-            android:text="Alamat:"
-            android:textSize="14sp"
-            android:textColor="@color/labelTextColor"
-            android:padding="8dp" />
+    <!-- Alamat -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/textViewAlamatKaryawan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="start"
+            android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@color/valueTextColor"
-            android:padding="8dp" />
-    </GridLayout>
+            android:text="Alamat" />
+    </LinearLayout>
 
-    <!-- Buttons -->
+    <!-- Kontak -->
+
+
+    <!-- Tombol Edit dan Delete -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/editButtonColor"
-            android:text="Edit"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_marginEnd="8dp"
-            android:padding="12dp" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Edit"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_edit"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonDelete"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/deleteButtonColor"
-            android:text="Hapus"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:padding="12dp" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Delete"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_delete"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
 </LinearLayout>
