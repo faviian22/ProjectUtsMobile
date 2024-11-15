@@ -155,11 +155,7 @@ class ProdukActivity : AppCompatActivity() {
     private fun createDialog(layoutResId: Int): Dialog {
         val dialog = Dialog(this)
         dialog.setContentView(layoutResId)
-        dialog.setCancelable(false)
-        dialog.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        dialog.setCancelable(true)
         return dialog
     }
 }
