@@ -96,7 +96,7 @@ class ProdukAdapter(
         fun bind(produk: Produk) {
             textNamaProduk.text = produk.namaProduk
             textHargaProduk.text = "Rp. ${produk.hargaProduk}"
-            textStokProduk.text = "Stok: ${produk.stokProduk}"
+            textStokProduk.text = "${produk.stokProduk}"
             textSatuanProduk.text = produk.satuanProduk // Menampilkan satuan produk
         }
     }

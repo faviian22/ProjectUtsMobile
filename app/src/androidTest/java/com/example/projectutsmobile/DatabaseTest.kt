@@ -1,14 +1,10 @@
 package com.example.projectutsmobile
 
 import android.content.Context
-import androidx.room.Dao
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.app.dao.SuplierDao
-import com.example.projectutsmobile.KaryawanDao
-import com.example.projectutsmobile.BakeryDatabase
-import com.example.projectutsmobile.Karyawan
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
