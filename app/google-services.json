@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "371868418497",
+    "project_id": "projectutsmobile",
+    "storage_bucket": "projectutsmobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371868418497:android:fe351cd3cdc32e0dafaf40",
+        "android_client_info": {
+          "package_name": "com.example.projectutsmobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa_m6IiXBLVkgwXD8pPoDOnHgv_4j64tg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
