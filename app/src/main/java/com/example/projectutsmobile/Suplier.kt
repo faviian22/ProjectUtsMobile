@@ -7,9 +7,11 @@ import androidx.room.PrimaryKey
 data class Suplier(
     @PrimaryKey(autoGenerate = true)
     val id_suplier: Int = 0,
-    var nama_suplier: String,
-    var no_Tlpn: String,
-    var alamat_suplier: String,
-    var nama_produk: String
-
-)
+    val nama_suplier: String = "",
+    val no_Tlpn: String = "",
+    val alamat_suplier: String = "",
+    val nama_produk: String = ""
+) {
+    // Konstruktor kosong untuk keperluan Firebase
+    constructor() : this(0, "", "", "", "")
+}
