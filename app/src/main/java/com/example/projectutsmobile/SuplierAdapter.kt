@@ -82,7 +82,7 @@ class SuplierAdapter(
         private val textViewHeader: TextView = view.findViewById(R.id.textViewHeader)
 
         fun bind() {
-            textViewHeader.text = "Supplier List"
+            textViewHeader.text = "A-Z"
         }
     }
 

@@ -17,6 +17,7 @@
         android:layout_height="200dp"
         android:src="@drawable/roti"
         android:scaleType="centerCrop"
+        android:layout_marginTop="80dp"
         android:contentDescription="Header Image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
