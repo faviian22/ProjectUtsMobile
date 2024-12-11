@@ -44,6 +44,28 @@ class SuplierActivity : AppCompatActivity() {
         binding.buttonSaveSuplier.setOnClickListener {
             showAddDialog()
         }
+
+        // Set up SearchView
+        binding.searchViewSuplier.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { searchSuplier(it) }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { searchSuplier(it) }
+                return false
+            }
+        })
+    }
+
+    private fun searchSuplier(query: String) {
+        val filteredList = suplierViewModel.allSuplier.value?.filter {
+            it.nama_suplier.contains(query, ignoreCase = true)
+        }
+        filteredList?.let {
+            adapter.submitList(it)
+        }
     }
 
     private fun showToast(message: String) {

@@ -8,6 +8,7 @@
     android:background="@drawable/background"
     android:gravity="center">
 
+    <!-- Title Section -->
     <TextView
         android:id="@+id/textViewSuplierTitle"
         android:layout_width="wrap_content"
@@ -20,6 +21,16 @@
         android:layout_marginBottom="20dp"
         android:layout_gravity="center" />
 
+    <!-- SearchView -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewSuplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search Suplier"
+        android:layout_marginBottom="16dp"
+        app:iconifiedByDefault="false" />
+
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewSuplier"
         android:layout_width="match_parent"
@@ -29,8 +40,9 @@
         android:background="@android:color/white"
         android:clipToPadding="false"
         android:elevation="4dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp" />
 
+    <!-- Add Button -->
     <Button
         android:id="@+id/buttonSaveSuplier"
         android:layout_width="match_parent"

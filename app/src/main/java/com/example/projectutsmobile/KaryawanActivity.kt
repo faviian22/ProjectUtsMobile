@@ -57,6 +57,28 @@ class KaryawanActivity : AppCompatActivity() {
         binding.buttonSaveKaryawan.setOnClickListener {
             showAddDialog()
         }
+
+        // Set up SearchView
+        binding.searchViewKaryawan.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { searchKaryawan(it) }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { searchKaryawan(it) }
+                return false
+            }
+        })
+    }
+
+    private fun searchKaryawan(query: String) {
+        val filteredList = karyawanViewModel.firebaseKaryawan.value?.filter {
+            it.nama_karyawan.contains(query, ignoreCase = true)
+        }
+        filteredList?.let {
+            adapter.submitList(it)
+        }
     }
 
     private fun showToast(message: String, length: Int) {

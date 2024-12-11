@@ -21,6 +21,15 @@
         android:layout_marginBottom="24dp"
         android:layout_gravity="center" />
 
+    <!-- SearchView -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewKaryawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search Karyawan"
+        android:layout_marginBottom="16dp"
+        app:iconifiedByDefault="false" />
+
     <!-- RecyclerView with Grid Layout -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewKaryawan"
