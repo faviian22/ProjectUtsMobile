@@ -27,7 +27,18 @@ class ProdukActivity : AppCompatActivity() {
             onEditClick = { produk -> showEditDialog(produk) },
             onDeleteClick = { produk -> showDeleteDialog(produk) }
         )
-        binding.recyclerviewProduk.layoutManager = GridLayoutManager(this, 2)
+        val layoutManager = GridLayoutManager(this, 2).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (adapter.getItemViewType(position)) {
+                        ProdukAdapter.VIEW_TYPE_HEADER_LOW_STOK, ProdukAdapter.VIEW_TYPE_HEADER_SAFE_STOK -> 2 // Header full-width
+                        ProdukAdapter.VIEW_TYPE_ITEM -> 1 // Item produk satu kolom
+                        else -> 1
+                    }
+                }
+            }
+        }
+        binding.recyclerviewProduk.layoutManager = layoutManager
         binding.recyclerviewProduk.adapter = adapter
 
         // Observe ViewModel data
@@ -105,7 +116,12 @@ class ProdukActivity : AppCompatActivity() {
             val harga = editTextHarga.text.toString().toIntOrNull()
 
             if (isValidInput(nama, stok, satuan, harga)) {
-                val updatedProduk = produk.copy(namaProduk = nama, stokProduk = stok!!, satuanProduk = satuan, hargaProduk = harga!!)
+                val updatedProduk = produk.copy(
+                    namaProduk = nama,
+                    stokProduk = stok!!,
+                    satuanProduk = satuan,
+                    hargaProduk = harga!!
+                )
                 produkViewModel.update(updatedProduk)
                 dialog.dismiss()
                 showToast("Produk updated successfully", Toast.LENGTH_SHORT)
