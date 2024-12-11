@@ -33,7 +33,7 @@ class SuplierActivity : AppCompatActivity() {
         suplierViewModel = ViewModelProvider(this).get(SuplierViewModel::class.java)
         suplierViewModel.allSuplier.observe(this) { suplierList ->
             suplierList?.let {
-                adapter.submitList(it.sortedBy { suplier -> suplier.nama_suplier })
+                adapter.submitList(it)
             }
         }
 
