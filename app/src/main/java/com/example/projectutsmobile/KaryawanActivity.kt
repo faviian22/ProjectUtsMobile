@@ -25,11 +25,21 @@ class KaryawanActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Set up RecyclerView
+        val layoutManager = GridLayoutManager(this, 2) // 2 columns in the grid
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when (adapter.getItemViewType(position)) {
+                    KaryawanAdapter.VIEW_TYPE_HEADER -> 2 // Header spans 2 columns
+                    KaryawanAdapter.VIEW_TYPE_ITEM -> 1 // Each item spans 1 column
+                    else -> 1
+                }
+            }
+        }
+        binding.recyclerviewKaryawan.layoutManager = layoutManager
         adapter = KaryawanAdapter(
             onEditClick = { karyawan -> showEditDialog(karyawan) },
             onDeleteClick = { karyawan -> showDeleteDialog(karyawan) }
         )
-        binding.recyclerviewKaryawan.layoutManager = GridLayoutManager(this, 2)
         binding.recyclerviewKaryawan.adapter = adapter
 
         // Initialize ViewModel and observe Firebase LiveData
