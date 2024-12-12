@@ -50,6 +50,28 @@ class ProdukActivity : AppCompatActivity() {
         binding.buttonSaveProduk.setOnClickListener {
             showAddDialog()
         }
+
+        // Set up SearchView
+        binding.searchViewProduk.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { searchProduk(it) }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { searchProduk(it) }
+                return false
+            }
+        })
+    }
+
+    private fun searchProduk(query: String) {
+        val filteredList = produkViewModel.allProduk.value?.filter {
+            it.namaProduk.contains(query, ignoreCase = true)
+        }
+        filteredList?.let {
+            adapter.submitList(it)
+        }
     }
 
     private fun showToast(message: String, length: Int) {
