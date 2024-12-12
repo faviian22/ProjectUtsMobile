@@ -8,6 +8,14 @@
     android:background="@drawable/background"
     android:gravity="center">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search Suplier"
+        android:layout_marginBottom="16dp"
+        app:iconifiedByDefault="false" />
+
 
     <TextView
         android:id="@+id/textViewProdukTitle"
