@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@android:color/darker_gray"
+    android:background="@color/buttonBackgroundColor"
     android:padding="16dp">
 
     <TextView

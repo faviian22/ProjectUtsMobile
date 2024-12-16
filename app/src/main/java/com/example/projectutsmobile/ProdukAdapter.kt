@@ -3,7 +3,6 @@ package com.example.projectutsmobile
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
@@ -92,12 +91,11 @@ class ProdukAdapter(
         val buttonEdit: AppCompatImageButton = view.findViewById(R.id.buttonEdit)
         val buttonDelete: AppCompatImageButton = view.findViewById(R.id.buttonDelete)
 
-
         fun bind(produk: Produk) {
             textNamaProduk.text = produk.namaProduk
             textHargaProduk.text = "Rp. ${produk.hargaProduk}"
-            textStokProduk.text = "${produk.stokProduk}"
-            textSatuanProduk.text = produk.satuanProduk // Menampilkan satuan produk
+            textStokProduk.text = produk.stokProduk.toString()
+            textSatuanProduk.text = produk.satuanProduk
         }
     }
 

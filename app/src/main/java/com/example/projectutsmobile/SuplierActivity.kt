@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectutsmobile.databinding.ActivitySuplierBinding
 
 class SuplierActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySuplierBinding
-    private lateinit var suplierViewModel: SuplierViewModel
+    private val suplierViewModel: SuplierViewModel by viewModels()
     private lateinit var adapter: SuplierAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,18 +29,18 @@ class SuplierActivity : AppCompatActivity() {
         binding.recyclerviewSuplier.layoutManager = LinearLayoutManager(this)
         binding.recyclerviewSuplier.adapter = adapter
 
-        // Initialize ViewModel and observe LiveData
-        suplierViewModel = ViewModelProvider(this).get(SuplierViewModel::class.java)
-        suplierViewModel.allSuplier.observe(this) { suplierList ->
+        // Observe ViewModel data
+        suplierViewModel.firebaseSuplier.observe(this) { suplierList ->
             suplierList?.let {
-                adapter.submitList(it)
+                val sortedList = it.sortedBy { suplier -> suplier.nama_suplier.lowercase() }
+                adapter.submitList(sortedList)
             }
         }
 
         // Fetch data from Firebase
         suplierViewModel.fetchSuplierFromFirebase()
 
-        // Add button action
+        // Set up add button to show the add dialog
         binding.buttonSaveSuplier.setOnClickListener {
             showAddDialog()
         }
@@ -60,16 +60,16 @@ class SuplierActivity : AppCompatActivity() {
     }
 
     private fun searchSuplier(query: String) {
-        val filteredList = suplierViewModel.allSuplier.value?.filter {
+        val filteredList = suplierViewModel.firebaseSuplier.value?.filter {
             it.nama_suplier.contains(query, ignoreCase = true)
-        }
+        }?.sortedBy { it.nama_suplier.lowercase() }
         filteredList?.let {
             adapter.submitList(it)
         }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this, message, length).show()
     }
 
     private fun createDialog(layoutResId: Int): Dialog {
@@ -100,11 +100,11 @@ class SuplierActivity : AppCompatActivity() {
 
             if (isValidInput(nama, noTlpn, alamat, namaProduk)) {
                 val newSuplier = Suplier(0, nama, noTlpn, alamat, namaProduk)
-                suplierViewModel.insert(listOf(newSuplier))  // Insert as a list
+                suplierViewModel.insert(newSuplier)
                 dialog.dismiss()
-                showToast("Suplier added successfully")
+                showToast("Suplier berhasil ditambahkan", Toast.LENGTH_SHORT)
             } else {
-                showToast("Please fill all fields")
+                showToast("Harap isi semua bagian dengan data yang valid", Toast.LENGTH_LONG)
             }
         }
 
@@ -139,11 +139,11 @@ class SuplierActivity : AppCompatActivity() {
                     alamat_suplier = alamat,
                     nama_produk = namaProduk
                 )
-                suplierViewModel.update(listOf(updatedSuplier))  // Update as a list
+                suplierViewModel.update(updatedSuplier)
                 dialog.dismiss()
-                showToast("Suplier updated successfully")
+                showToast("Suplier berhasil diperbarui", Toast.LENGTH_SHORT)
             } else {
-                showToast("Please fill all fields")
+                showToast("Harap isi semua bagian dengan data yang valid", Toast.LENGTH_LONG)
             }
         }
 
@@ -151,7 +151,9 @@ class SuplierActivity : AppCompatActivity() {
     }
 
     private fun showDeleteDialog(suplier: Suplier) {
-        val dialog = createDialog(R.layout.dialog_delete_suplier)
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_delete_suplier)
+        dialog.setCancelable(true)
 
         val buttonCancel = dialog.findViewById<Button>(R.id.buttonCancel)
         val buttonConfirmDelete = dialog.findViewById<Button>(R.id.buttonConfirmDelete)
@@ -163,7 +165,7 @@ class SuplierActivity : AppCompatActivity() {
         buttonConfirmDelete.setOnClickListener {
             suplierViewModel.delete(suplier)
             dialog.dismiss()
-            showToast("Suplier deleted successfully")
+            showToast("Suplier berhasil dihapus", Toast.LENGTH_SHORT)
         }
 
         dialog.show()

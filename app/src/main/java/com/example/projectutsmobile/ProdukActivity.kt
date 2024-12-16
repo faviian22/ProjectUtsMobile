@@ -3,6 +3,7 @@ package com.example.projectutsmobile
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -42,9 +43,15 @@ class ProdukActivity : AppCompatActivity() {
         binding.recyclerviewProduk.adapter = adapter
 
         // Observe ViewModel data
-        produkViewModel.allProduk.observe(this) { produkList ->
-            produkList?.let { adapter.submitList(it) }
+        produkViewModel.firebaseProduk.observe(this) { produkList ->
+            produkList?.let {
+                adapter.submitList(it)
+                Log.d("ProdukActivity", "Data Produk: $it") // Log data produk
+            }
         }
+
+        // Fetch data from Firebase
+        produkViewModel.fetchProdukFromFirebase()
 
         // Set up add button to show the add dialog
         binding.buttonSaveProduk.setOnClickListener {
@@ -66,7 +73,7 @@ class ProdukActivity : AppCompatActivity() {
     }
 
     private fun searchProduk(query: String) {
-        val filteredList = produkViewModel.allProduk.value?.filter {
+        val filteredList = produkViewModel.firebaseProduk.value?.filter {
             it.namaProduk.contains(query, ignoreCase = true)
         }
         filteredList?.let {
@@ -108,9 +115,9 @@ class ProdukActivity : AppCompatActivity() {
                 val produkBaru = Produk(0, nama, stok!!, satuan, harga!!)
                 produkViewModel.insert(produkBaru)
                 dialog.dismiss()
-                showToast("Produk added successfully", Toast.LENGTH_SHORT)
+                showToast("Produk berhasil ditambahkan", Toast.LENGTH_SHORT)
             } else {
-                showToast("Please fill all fields with valid data", Toast.LENGTH_LONG)
+                showToast("Harap isi semua bagian dengan data yang valid", Toast.LENGTH_LONG)
             }
         }
 
@@ -132,23 +139,23 @@ class ProdukActivity : AppCompatActivity() {
         editTextHarga.setText(produk.hargaProduk.toString())
 
         buttonUpdate.setOnClickListener {
-            val nama = editTextNama.text.toString().trim()
-            val stok = editTextStok.text.toString().toIntOrNull()
-            val satuan = editTextSatuan.text.toString().trim()
-            val harga = editTextHarga.text.toString().toIntOrNull()
+            val nama = editTextNama.text.toString().trim().takeIf { it.isNotEmpty() } ?: produk.namaProduk
+            val stok = editTextStok.text.toString().toIntOrNull() ?: produk.stokProduk
+            val satuan = editTextSatuan.text.toString().trim().takeIf { it.isNotEmpty() } ?: produk.satuanProduk
+            val harga = editTextHarga.text.toString().toIntOrNull() ?: produk.hargaProduk
 
             if (isValidInput(nama, stok, satuan, harga)) {
                 val updatedProduk = produk.copy(
                     namaProduk = nama,
-                    stokProduk = stok!!,
+                    stokProduk = stok,
                     satuanProduk = satuan,
-                    hargaProduk = harga!!
+                    hargaProduk = harga
                 )
                 produkViewModel.update(updatedProduk)
                 dialog.dismiss()
-                showToast("Produk updated successfully", Toast.LENGTH_SHORT)
+                showToast("Produk berhasil diperbarui", Toast.LENGTH_SHORT)
             } else {
-                showToast("Please fill all fields with valid data", Toast.LENGTH_LONG)
+                showToast("Harap isi semua bagian dengan data yang valid", Toast.LENGTH_LONG)
             }
         }
 
@@ -157,12 +164,12 @@ class ProdukActivity : AppCompatActivity() {
 
     private fun showDeleteDialog(produk: Produk) {
         val dialog = AlertDialog.Builder(this)
-            .setMessage("Are you sure you want to delete this produk?")
-            .setPositiveButton("Yes") { _, _ ->
+            .setMessage("Apakah Anda yakin ingin menghapus produk ini?")
+            .setPositiveButton("Ya") { _, _ ->
                 produkViewModel.delete(produk)
-                showToast("Produk deleted successfully", Toast.LENGTH_SHORT)
+                showToast("Produk berhasil dihapus", Toast.LENGTH_SHORT)
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton("Tidak", null)
             .create()
 
         dialog.show()

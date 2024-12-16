@@ -25,12 +25,12 @@ class KaryawanActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Set up RecyclerView
-        val layoutManager = GridLayoutManager(this, 2) // 2 columns in the grid
+        val layoutManager = GridLayoutManager(this, 2) // 2 kolom dalam grid
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when (adapter.getItemViewType(position)) {
-                    KaryawanAdapter.VIEW_TYPE_HEADER -> 2 // Header spans 2 columns
-                    KaryawanAdapter.VIEW_TYPE_ITEM -> 1 // Each item spans 1 column
+                    KaryawanAdapter.VIEW_TYPE_HEADER -> 2 // Header mencakup 2 kolom
+                    KaryawanAdapter.VIEW_TYPE_ITEM -> 1 // Setiap item mencakup 1 kolom
                     else -> 1
                 }
             }
@@ -42,7 +42,7 @@ class KaryawanActivity : AppCompatActivity() {
         )
         binding.recyclerviewKaryawan.adapter = adapter
 
-        // Initialize ViewModel and observe Firebase LiveData
+        // Inisialisasi ViewModel dan observasi LiveData dari Firebase
         karyawanViewModel = ViewModelProvider(this).get(KaryawanViewModel::class.java)
         karyawanViewModel.firebaseKaryawan.observe(this) { karyawanList ->
             karyawanList?.let {
@@ -50,10 +50,10 @@ class KaryawanActivity : AppCompatActivity() {
             }
         }
 
-        // Fetch data from Firebase
+        // Ambil data dari Firebase
         karyawanViewModel.fetchKaryawanFromFirebase()
 
-        // Set up add button to show the add dialog
+        // Set up add button untuk menampilkan dialog add
         binding.buttonSaveKaryawan.setOnClickListener {
             showAddDialog()
         }
@@ -126,9 +126,9 @@ class KaryawanActivity : AppCompatActivity() {
                 val karyawanBaru = Karyawan(0, nama, jenisKelamin, alamat)
                 karyawanViewModel.insert(listOf(karyawanBaru))
                 dialog.dismiss()
-                showToast("Karyawan added successfully", Toast.LENGTH_SHORT)
+                showToast("Karyawan berhasil ditambahkan", Toast.LENGTH_SHORT)
             } else {
-                showToast("Please fill all fields", Toast.LENGTH_LONG)
+                showToast("Harap isi semua bagian dengan data yang valid", Toast.LENGTH_LONG)
             }
         }
 
@@ -165,9 +165,9 @@ class KaryawanActivity : AppCompatActivity() {
                 )
                 karyawanViewModel.update(listOf(updatedKaryawan))
                 dialog.dismiss()
-                showToast("Karyawan updated successfully", Toast.LENGTH_SHORT)
+                showToast("Karyawan berhasil diperbarui", Toast.LENGTH_SHORT)
             } else {
-                showToast("Please fill all fields", Toast.LENGTH_LONG)
+                showToast("Harap isi semua bagian dengan data yang valid", Toast.LENGTH_LONG)
             }
         }
 
@@ -176,12 +176,12 @@ class KaryawanActivity : AppCompatActivity() {
 
     private fun showDeleteDialog(karyawan: Karyawan) {
         val dialog = AlertDialog.Builder(this)
-            .setMessage("Are you sure you want to delete this karyawan?")
-            .setPositiveButton("Yes") { _, _ ->
+            .setMessage("Apakah Anda yakin ingin menghapus data karyawan ini?")
+            .setPositiveButton("Ya") { _, _ ->
                 karyawanViewModel.delete(karyawan)
-                showToast("Karyawan deleted successfully", Toast.LENGTH_SHORT)
+                showToast("Karyawan berhasil dihapus", Toast.LENGTH_SHORT)
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton("Tidak", null)
             .create()
 
         dialog.show()

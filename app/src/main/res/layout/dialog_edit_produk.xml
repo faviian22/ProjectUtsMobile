@@ -9,9 +9,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@android:color/white"
+        android:background="@color/backgroundColor"
         android:elevation="4dp">
 
+        <!-- Nama Produk -->
         <EditText
             android:id="@+id/editTextNamaProduk"
             android:layout_width="match_parent"
@@ -19,8 +20,11 @@
             android:hint="Nama Produk"
             android:padding="12dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
+            android:background="@drawable/edit_text_background"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp" />
 
+        <!-- Stok Produk -->
         <EditText
             android:id="@+id/editTextStokProduk"
             android:layout_width="match_parent"
@@ -29,17 +33,23 @@
             android:inputType="number"
             android:padding="12dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
+            android:background="@drawable/edit_text_background"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp" />
 
+        <!-- Satuan Produk -->
         <EditText
             android:id="@+id/editTextSatuanProduk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Stok Produk"
+            android:hint="Satuan Produk"
             android:padding="12dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background" />
+            android:background="@drawable/edit_text_background"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp" />
 
+        <!-- Harga Produk -->
         <EditText
             android:id="@+id/editTextHargaProduk"
             android:layout_width="match_parent"
@@ -48,16 +58,20 @@
             android:inputType="number"
             android:padding="12dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/edit_text_background" />
+            android:background="@drawable/edit_text_background"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp" />
 
+        <!-- Tombol Simpan -->
         <Button
             android:id="@+id/buttonSaveProduk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Simpan"
             android:padding="12dp"
-            android:backgroundTint="@android:color/holo_blue_light"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:backgroundTint="@color/buttonBackgroundColor"
+            android:textColor="@color/buttonTextColor"
+            android:textStyle="bold"
+            android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>

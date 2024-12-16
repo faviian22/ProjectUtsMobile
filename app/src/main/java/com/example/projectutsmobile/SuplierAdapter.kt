@@ -12,7 +12,7 @@ class SuplierAdapter(
     private val onDelete: (Suplier) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val items = mutableListOf<Any>()  // List that holds headers and supplier items
+    private val items = mutableListOf<Any>()
 
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {

@@ -27,22 +27,22 @@ class ProdukViewModel(application: Application) : AndroidViewModel(application) 
     private val _firebaseProduk = MutableLiveData<List<Produk>>()
     val firebaseProduk: LiveData<List<Produk>> get() = _firebaseProduk
 
+    init {
+        // Fetch data from Firebase when ViewModel is created
+        fetchProdukFromFirebase()
+    }
+
     // Insert Produk in both Room and Firebase
     fun insert(produk: Produk) = viewModelScope.launch(Dispatchers.IO) {
-        // Generate unique ID for the produk
-        val uniqueId = UUID.randomUUID().mostSignificantBits.toInt()
+        // Generate unique ID for the produk if not already set
+        val uniqueId = produk.id_produk.takeIf { it != 0 } ?: produkRef.push().key?.hashCode() ?: 0
         val produkWithId = produk.copy(id_produk = uniqueId)
 
         // Insert into Room database
         produkDao.insert(produkWithId)
 
-        // Insert into Firebase Realtime Database if online
-        if (isNetworkAvailable()) {
-            produkRef.child(produkWithId.id_produk.toString()).setValue(produkWithId)  // Insert to Firebase
-        } else {
-            // If offline, store locally for later sync
-            storeOffline(listOf(produkWithId))
-        }
+        // Insert into Firebase Realtime Database
+        produkRef.child(produkWithId.id_produk.toString()).setValue(produkWithId)
     }
 
     // Update Produk in both Room and Firebase
@@ -50,10 +50,8 @@ class ProdukViewModel(application: Application) : AndroidViewModel(application) 
         // Update in Room database
         produkDao.update(produk)
 
-        // Update in Firebase Realtime Database if online
-        if (isNetworkAvailable()) {
-            produkRef.child(produk.id_produk.toString()).setValue(produk)  // Update in Firebase
-        }
+        // Update in Firebase Realtime Database
+        produkRef.child(produk.id_produk.toString()).setValue(produk)
     }
 
     // Delete Produk in both Room and Firebase
@@ -62,9 +60,7 @@ class ProdukViewModel(application: Application) : AndroidViewModel(application) 
         produkDao.delete(produk)
 
         // Delete from Firebase Realtime Database
-        if (isNetworkAvailable()) {
-            produkRef.child(produk.id_produk.toString()).removeValue()  // Remove from Firebase
-        }
+        produkRef.child(produk.id_produk.toString()).removeValue()
     }
 
     // Fetch Produk data from Firebase
@@ -72,9 +68,11 @@ class ProdukViewModel(application: Application) : AndroidViewModel(application) 
         produkRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val produkList = mutableListOf<Produk>()
-                snapshot.children.forEach {
-                    val produk = it.getValue(Produk::class.java)
-                    produk?.let { produkList.add(it) }
+                snapshot.children.forEach { dataSnapshot ->
+                    val produk = dataSnapshot.getValue(Produk::class.java)
+                    produk?.let {
+                        produkList.add(it)
+                    }
                 }
                 _firebaseProduk.postValue(produkList)
             }
@@ -83,16 +81,5 @@ class ProdukViewModel(application: Application) : AndroidViewModel(application) 
                 // Handle error
             }
         })
-    }
-
-    // Check if network is available
-    private fun isNetworkAvailable(): Boolean {
-        // Implement network connectivity check logic here
-        return true // Simulate network availability
-    }
-
-    // Store data locally when offline
-    private fun storeOffline(produkList: List<Produk>) {
-        // Implement offline data storage logic (could be done via Room or another local storage mechanism)
     }
 }

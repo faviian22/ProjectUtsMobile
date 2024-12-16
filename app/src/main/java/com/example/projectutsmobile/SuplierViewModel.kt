@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.UUID
+
 class SuplierViewModel(application: Application) : AndroidViewModel(application) {
 
     private val suplierDao = BakeryDatabase.getDatabase(application).suplierDao()
@@ -27,49 +28,37 @@ class SuplierViewModel(application: Application) : AndroidViewModel(application)
     private val _firebaseSuplier = MutableLiveData<List<Suplier>>()
     val firebaseSuplier: LiveData<List<Suplier>> get() = _firebaseSuplier
 
+    init {
+        fetchSuplierFromFirebase()
+    }
+
     // Insert Suplier in both Room and Firebase
-    fun insert(suplierList: List<Suplier>) = viewModelScope.launch(Dispatchers.IO) {
-        // Generate unique IDs for each suplier
-        val suplierWithUniqueIds = suplierList.map { suplier ->
-            val uniqueId = UUID.randomUUID().mostSignificantBits
-            suplier.copy(id_suplier = uniqueId.toInt())
-        }
+    fun insert(suplier: Suplier) = viewModelScope.launch(Dispatchers.IO) {
+        val uniqueId = suplier.id_suplier.takeIf { it != 0 } ?: suplierRef.push().key?.hashCode() ?: 0
+        val suplierWithId = suplier.copy(id_suplier = uniqueId)
 
-        // Insert into Room database
-        suplierDao.insertAll(suplierWithUniqueIds)
+        suplierDao.insert(suplierWithId)
 
-        // Insert into Firebase Realtime Database if online
         if (isNetworkAvailable()) {
-            suplierWithUniqueIds.forEach { suplier ->
-                suplierRef.child(suplier.id_suplier.toString()).setValue(suplier)  // Insert to Firebase
-            }
-        } else {
-            // If offline, store locally for later sync
-            storeOffline(suplierWithUniqueIds)
+            suplierRef.child(suplierWithId.id_suplier.toString()).setValue(suplierWithId)
         }
     }
 
     // Update Suplier in both Room and Firebase
-    fun update(suplierList: List<Suplier>) = viewModelScope.launch(Dispatchers.IO) {
-        // Update in Room database
-        suplierDao.updateAll(suplierList)
+    fun update(suplier: Suplier) = viewModelScope.launch(Dispatchers.IO) {
+        suplierDao.update(suplier)
 
-        // Update in Firebase Realtime Database if online
         if (isNetworkAvailable()) {
-            suplierList.forEach { suplier ->
-                suplierRef.child(suplier.id_suplier.toString()).setValue(suplier)  // Update in Firebase
-            }
+            suplierRef.child(suplier.id_suplier.toString()).setValue(suplier)
         }
     }
 
     // Delete Suplier in both Room and Firebase
     fun delete(suplier: Suplier) = viewModelScope.launch(Dispatchers.IO) {
-        // Delete from Room database
         suplierDao.delete(suplier)
 
-        // Delete from Firebase Realtime Database
         if (isNetworkAvailable()) {
-            suplierRef.child(suplier.id_suplier.toString()).removeValue()  // Remove from Firebase
+            suplierRef.child(suplier.id_suplier.toString()).removeValue()
         }
     }
 
@@ -93,7 +82,8 @@ class SuplierViewModel(application: Application) : AndroidViewModel(application)
 
     // Check network availability (simulated for now)
     private fun isNetworkAvailable(): Boolean {
-        return true  // Simulating always connected for now
+        // Simulate network check, replace with actual network check logic
+        return true
     }
 
     // Store data offline if network is unavailable (optional)

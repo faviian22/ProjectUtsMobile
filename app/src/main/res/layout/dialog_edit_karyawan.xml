@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white"
+    android:background="@color/backgroundColor"
     android:elevation="4dp">
 
+    <!-- Nama Karyawan -->
     <EditText
         android:id="@+id/editTextNamaKaryawan"
         android:layout_width="match_parent"
@@ -16,15 +16,20 @@
         android:inputType="textPersonName"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/edit_text_background" />
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp" />
 
+    <!-- Jenis Kelamin -->
     <Spinner
         android:id="@+id/spinnerJenisKelaminKaryawan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background" />
 
+    <!-- Alamat Karyawan -->
     <EditText
         android:id="@+id/editTextAlamatKaryawan"
         android:layout_width="match_parent"
@@ -33,16 +38,19 @@
         android:inputType="textPostalAddress"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/edit_text_background" />
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp" />
 
+    <!-- Tombol Update -->
     <Button
         android:id="@+id/buttonEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update"
+        android:text="Simpan"
         android:padding="12dp"
-        android:backgroundTint="@android:color/holo_blue_light"
-        android:textColor="@android:color/white"
+        android:backgroundTint="@color/buttonBackgroundColor"
+        android:textColor="@color/buttonTextColor"
         android:textStyle="bold"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp" />
 </LinearLayout>

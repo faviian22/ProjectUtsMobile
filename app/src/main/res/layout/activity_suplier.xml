@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/background"
+    android:background="@color/backgroundColor"
     android:gravity="center">
 
     <!-- Title Section -->
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Suplier List"
         android:textSize="28sp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/primaryTextColor"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginBottom="20dp"
@@ -26,9 +26,13 @@
         android:id="@+id/searchViewSuplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Search Suplier"
-        android:layout_marginBottom="16dp"
-        app:iconifiedByDefault="false" />
+        android:queryHint="Cari Suplier"
+        android:background="@drawable/editbox_background"
+        android:padding="8dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintWidth_default="spread"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
@@ -37,7 +41,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="10dp"
-        android:background="@android:color/white"
+        android:background="@color/rowBackgroundColor"
         android:clipToPadding="false"
         android:elevation="4dp"
         android:layout_marginBottom="20dp" />
@@ -49,8 +53,8 @@
         android:layout_height="wrap_content"
         android:text="Tambah Suplier"
         android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@android:color/holo_blue_light"
+        android:textColor="@color/buttonTextColor"
+        android:backgroundTint="@color/buttonBackgroundColor"
         android:layout_marginTop="20dp"
         android:padding="14dp"
         android:elevation="8dp"

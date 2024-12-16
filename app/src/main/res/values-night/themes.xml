@@ -2,6 +2,19 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ProjectUtsMobile" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryLightColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="android:colorBackground">@color/backgroundColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+    </style>
+
+    <style name="Theme.ProjectUtsMobile" parent="Base.Theme.ProjectUtsMobile" />
+
+    <style name="ButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:background">@color/buttonBackgroundColor</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 </resources>

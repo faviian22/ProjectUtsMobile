@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#74512D</color>
-    <color name="tableRowBackground">#F8F4E1</color> <!-- Light tan for rows -->
+    <color name="tableRowBackground">#333333</color> <!-- Dark gray for rows -->
     <color name="primaryColor">#AF8F6F</color> <!-- Light brown for primary color -->
     <color name="primaryLightColor">#74512D</color> <!-- Darker brown for hover or pressed states -->
 
     <!-- Secondary Colors -->
     <color name="secondaryColor">#AF8F6F</color> <!-- Light brown for secondary actions -->
-    <color name="secondaryLightColor">#F8F4E1</color> <!-- Lighter tan for secondary hover/pressed -->
+    <color name="secondaryLightColor">#333333</color> <!-- Darker gray for secondary hover/pressed -->
 
     <!-- Backgrounds -->
-    <color name="backgroundColor">#FFFFFF</color> <!-- Pure white for the overall background -->
+    <color name="backgroundColor">#000000</color> <!-- Black for dark mode background -->
 
     <!-- Row Background -->
-    <color name="rowBackgroundColor">#F8F4E1</color> <!-- Light tan for table row backgrounds -->
+    <color name="rowBackgroundColor">#333333</color> <!-- Dark gray for table row backgrounds -->
 
     <!-- Dividers -->
-    <color name="dividerColor">#DADADA</color> <!-- Light gray divider for subtle separation -->
+    <color name="dividerColor">#555555</color> <!-- Darker gray divider for subtle separation -->
 
     <!-- Buttons -->
     <color name="buttonBackgroundColor">#74512D</color> <!-- Dark brown for general action buttons -->
 
     <!-- Text Colors -->
-    <color name="primaryTextColor">#543310</color> <!-- Dark brown for main text -->
-    <color name="secondaryTextColor">#74512D</color> <!-- Medium brown for secondary text -->
+    <color name="primaryTextColor">#F8F4E1</color> <!-- Light tan for main text -->
+    <color name="secondaryTextColor">#F8F4E1</color> <!-- Light tan for secondary text -->
     <color name="buttonTextColor">#FFFFFF</color> <!-- White text for buttons -->
 
-    <color name="labelTextColor">#543310</color> <!-- Dark brown for labels -->
-    <color name="valueTextColor">#543310</color> <!-- Dark brown for values -->
+    <color name="labelTextColor">#F8F4E1</color> <!-- Light tan for labels -->
+    <color name="valueTextColor">#F8F4E1</color> <!-- Light tan for values -->
 
     <!-- Special Colors for Edit and Delete Buttons -->
     <color name="editButtonColor">#AF8F6F</color> <!-- Light brown for Edit button -->
